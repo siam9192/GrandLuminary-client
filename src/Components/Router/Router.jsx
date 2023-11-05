@@ -6,9 +6,11 @@ import Login from '../Pages/Form/Login/Login';
 import Routes from '../Routes/Routes';
 import Rooms from '../Pages/Rooms/Rooms';
 import RoomDetails from '../Pages/Rooms/RoomDetails';
+import Checkout from '../Pages/Form/Checkout/Checkout';
 
 const Router = createBrowserRouter([
     {
+    
         path:'/',
         element: <Home></Home>
     },
@@ -23,7 +25,11 @@ const Router = createBrowserRouter([
             {
                 path:'/rooms/details/:id',
                 element:<RoomDetails></RoomDetails>
-            }
+            },
+          {
+            path:'/rooms/checkout/:roomId',
+            element:<Checkout></Checkout>
+          }
         ]
     }
     ,

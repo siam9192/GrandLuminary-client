@@ -1,6 +1,16 @@
-.review-pop {
+checkout-pop {
     background: linear-gradient(135deg,rgba(84, 78, 78, 0.3),rgba(42, 36, 36, 0.3));
     backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
    -webkit-backdrop-filter: blur(10px);
- 
+   min-height: 100vh;
+   min-width: 100vh;
+   display: none ;
+   justify-content: center;
+   /* justify-items: center; */
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+
+  
 }

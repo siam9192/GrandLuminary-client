@@ -14,7 +14,8 @@ const Rooms = () => {
         navigate(`/rooms/details/${id}`)
     }
     return (
-        <div className='min-h-[90vh] font-pop mb-2'>
+        
+        <div className='min-h-[90vh]  font-pop mb-2'>
             <div className='flex'>
             <div className='w-1/4 space-y-2 px-2 py-14  '>
                   <h2 className='text-xl text-black'>filters</h2>
@@ -67,6 +68,9 @@ const Rooms = () => {
                 }
                 
             </div>
+            </div>
+            <div className="checkout-pop">
+                
             </div>
         </div>
     );
