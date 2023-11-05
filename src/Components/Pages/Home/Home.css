@@ -1,7 +1,7 @@
 .news-latter{
     background-image: url('images/hotel/banner/banner2.jpg'),linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8));
-    background-position: center;
+    background-position: left;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 50%;
     background-blend-mode: overlay;
 }

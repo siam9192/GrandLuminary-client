@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { fireBaseContext } from '../../../../AuthProvider/AuthProvider';
-import { useNavigate,useLocation } from 'react-router-dom';
-
+import { useNavigate,useLocation, Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import './signUp.css'
 const SignUp = () => {
             const [toggle,setToggle] = useState(false);
             const [err,setErr] = useState('');
@@ -18,11 +19,15 @@ const SignUp = () => {
             let photoUrl = form.photo.value;
             const email = form.email.value;
             const password = form.password.value;
-            
+            const con_password = form.confrime_password.value;
             if(password.length < 6){
                 setLoading(false)
                 setErr('Password must be at least 6 characters');
                 
+                return;
+            }
+            else if(password !== con_password){
+                setErr("Password does'nt match")
                 return;
             }
             else if(!/[A-Z]/.test(password)){
@@ -98,15 +103,18 @@ const SignUp = () => {
                 </div>
                 <div className='space-y-2'>
                     <h3>Confrim Password</h3>
-                    <input type="text" name='con-password' className='w-full py-3 bg-gray-200 border-2 outline-none rounded px-2' required/>
+                    <input type="text" name='confrime_password' className='w-full py-3 bg-gray-200 border-2 outline-none rounded px-2' required/>
                 </div>
-                <button className='w-full py-2 text-white bg-blue-600'>Create your account</button>
+                {
+                err && <p className='text-red-600'>{err}</p>
+             }
+                <button type='submit' className='w-full py-2 text-white bg-blue-600'>Create your account</button>
+                <h1 className='text-black'>Already have an account?<Link to='/login' className = "text-blue-600 font-semibold">Login</Link></h1>
               </form>
              </div>
-             <div className='banner h-full flex justify-center items-center lg:block hidden'>
-                    <div>
-                        <h1 className='text-4xl text-white font-semibold'>Start your new journey with us <br />from here...</h1>
-                    </div>
+             
+             <div className='banner_sign h-full flex justify-center items-center lg:block hidden'>
+                   <img src="images/Form/signup.jpg" alt="" className='w-full h-full' />
              </div>
             </div>
         </div>
