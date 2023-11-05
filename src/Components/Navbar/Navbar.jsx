@@ -1,21 +1,21 @@
-import React from 'react';
+
 import { NavLink } from 'react-router-dom';
-import GetLoginInfo from '../../Resuse/GetLogInfo/GetLoginInfo';
-const BannerNavbar = () => {
+import GetLoginInfo from '../Resuse/GetLogInfo/GetLoginInfo';
+const Navbar = () => {
     const {user,logout} = GetLoginInfo();
     console.log(user)
     return (
-        <div className='flex items-center justify-between max-w-7xl mx-auto font-rob'>
+        <div className='flex items-center justify-between max-w-7xl mx-auto font-rob py-4'>
             <div className='flex items-center gap-2'>
                 <div>
-                <img src="images/Logo/Logo.png" alt="" className='w-20' />
+                <img src="/images/Logo/Logo.png" alt="" className='w-20' />
                 </div>
-                <h1 className='text-white font-bold text-3xl'>Grand Luminary</h1>
+                <h1 className='text-black font-bold text-3xl'>Grand Luminary</h1>
             </div>
             <nav>
-               <ul className='flex items-center gap-2 text-white text-xl'>
- <NavLink>Home</NavLink>
- <NavLink to='/rooms'>Rooms</NavLink>
+               <ul className='flex items-center gap-2 black text-xl'>
+ <NavLink to= '/'>Home</NavLink>
+ <NavLink>Rooms</NavLink>
  <NavLink>My Bookings</NavLink>
  {
     !user ? <>
@@ -38,7 +38,7 @@ const BannerNavbar = () => {
           </a>
         </li>
         <li className='text-red-500'  onClick={()=>{
-                      console.log(logout)
+                    
           logout()
 
         }}><a>Logout</a></li>
@@ -53,4 +53,4 @@ const BannerNavbar = () => {
     );
 }
 
-export default BannerNavbar;
+export default Navbar;

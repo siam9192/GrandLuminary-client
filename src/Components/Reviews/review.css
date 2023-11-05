@@ -1,0 +1,6 @@
+.review-pop {
+    background: linear-gradient(135deg,rgba(84, 78, 78, 0.3),rgba(42, 36, 36, 0.3));
+    backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+   -webkit-backdrop-filter: blur(10px);
+  
+}

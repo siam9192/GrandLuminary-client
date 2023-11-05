@@ -61,7 +61,7 @@ const Featured = () => {
   fullSymbol={<AiFillStar className='text-xl text-amber-400'></AiFillStar>}/>
                                    </div>
                                    <div>
-                                    <p>Review {item.review.length}</p>
+                                    <p>Review {item.reviews.length}</p>
                                    </div>
   </div>
                                 </div>
