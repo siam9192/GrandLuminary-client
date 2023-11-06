@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import GetLoginInfo from '../../../Resuse/GetLogInfo/GetLoginInfo';
 import Swal from 'sweetalert2'
 import AxiosBase from '../../../Axios/AxiosBase';
+import moment from 'moment/moment';
 const Checkout = () => {
     const [room,setRoom] = useState(null);
     const [startDate, setStartDate] = useState(null);
@@ -44,11 +45,11 @@ console.log(new Date().getDay())
  const booking_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
  const notes = e.target.notes.value;
  const booking = {
-    user_email,image,room_id,price,checkInDate,check_out_date,booking_date,notes
+    user_email,image,room_id,price,check_in_date,check_out_date,booking_date,notes
  }
  setBookingDetails({user_email,image,room_id,price,check_in_date,check_out_date,booking_date,notes})
  
-    AxiosBase().post('/api/v1/bookimg',booking)
+    AxiosBase().post('/api/v1/booking/new',booking)
     .then(data =>{
         if(data.data.insertedId){
             e.target.reset();
@@ -56,8 +57,11 @@ console.log(new Date().getDay())
         }
        
     })
+    console.log(booking)
     }
 //    console.log(bookingDetails)
+
+
     return (
         <div className='max-w-7xl mx-auto min-h-[90vh] font-pop grid md:grid-cols-2 grid-cols-1 duration-300'>
             <form action="" onSubmit={submitCheckOut}>

@@ -9,18 +9,19 @@ const MyBookings = () => {
     const {user,loading} = useContext(fireBaseContext);
     useEffect(()=>{
  AxiosBase().get(`/api/v1/bookings?user_email=${user.email}`)
- .then(res => setBookings(re.data))
+ .then(res => setBookings(res.data))
     },[])
+    console.log(bookings)
     return (
         <div className='max-w-7xl mx-auto font-pop'>
             <Navbar></Navbar>      
           
            <div className='py-4'>
-                <h1 className='text-2xl text-black'>You have 5 bookings</h1>
+                <h1 className='text-2xl text-black py-3'>You have {bookings.length} bookings</h1>
                <div className='grid md:grid-cols-2 gap-5'>
                 {
                     bookings.map((booking,index)=>{
-                       return <booking booking = {booking} key = {index}></booking>
+                       return <Booking booking={booking} key = {index}></Booking>
                     })
                 }
                </div>
