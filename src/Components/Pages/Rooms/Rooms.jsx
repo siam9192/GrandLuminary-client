@@ -15,10 +15,10 @@ const Rooms = () => {
     }
     return (
         
-        <div className='min-h-[90vh]  font-pop mb-2'>
+        <div className='min-h-[90vh]  font-pop mb-2 max-w-7xl mx-auto'>
             <div className='flex'>
             <div className='w-1/4 space-y-2 px-2 py-14  '>
-                  <h2 className='text-xl text-black'>filters</h2>
+                  {/* <h2 className='text-2xl text-black'>filters</h2> */}
                   
                   <div className='space-y-2'>
               
@@ -47,7 +47,7 @@ const Rooms = () => {
                             return <div className=' bg-white hover:cursor-pointer' key={index} onClick={()=>{
                                 changeRoute(room.id)
                             }}>
-                                     <img src={room.roomImages[0]} alt="" className='w-full h-72 rounded-lg' />
+                                     <img src={room.roomImages[0]} alt="" className='w-full h-72' />
                                      <div className='px-2'>
                                         <h1 className='text-black text-2xl py-2'>${room.pricePerNight}/Night</h1>
                                         <div>
@@ -69,9 +69,7 @@ const Rooms = () => {
                 
             </div>
             </div>
-            <div className="checkout-pop">
-                
-            </div>
+          
         </div>
     );
 }

@@ -16,7 +16,9 @@ const BannerNavbar = () => {
                <ul className='flex items-center gap-2 text-white text-xl'>
  <NavLink>Home</NavLink>
  <NavLink to='/rooms'>Rooms</NavLink>
- <NavLink>My Bookings</NavLink>
+ <NavLink to='/mybooking'>My Bookings</NavLink>
+ <NavLink to='/add-post'>Post</NavLink>
+ <NavLink to='about'>About us</NavLink>
  {
     !user ? <>
     <NavLink to='/signup'>Sign up</NavLink>

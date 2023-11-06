@@ -17,6 +17,7 @@ const Navbar = () => {
  <NavLink to= '/'>Home</NavLink>
  <NavLink>Rooms</NavLink>
  <NavLink>My Bookings</NavLink>
+ <NavLink to='/about'>About us</NavLink>
  {
     !user ? <>
     <NavLink to='/signup'>Sign up</NavLink>

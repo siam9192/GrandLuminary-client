@@ -3,10 +3,11 @@
       {
         "id":1,
         "name": "Standard Room",
+        "room_no": 201,
         "pricePerNight": 150,
         "roomSize": "300 sq ft",
-        "totalSeat": 3,
-        "availableSeat":3,
+        
+        "beds":3,
         "availability": true,
         "ratting":4.5,
         "reviews":[],
@@ -17,10 +18,11 @@
       {
 "id":2,
         "name": "Luxury Suite",
+        "room_no": 204,
         "pricePerNight": 350,
         "roomSize": "600 sq ft",
-        "totalSeat": 3,
-        "availableSeat":3,
+        
+        "beds":3,
         "availability": false,
         "ratting":4.5,
         "reviews":[],
@@ -30,11 +32,12 @@
       },
       {
         "id":3,
+        "room_no": 205,
         "name": "Ocean View Room",
         "pricePerNight": 250,
         "roomSize": "400 sq ft",
-        "totalSeat": 3,
-        "availableSeat":3,
+        
+        "beds":3,
         "availability": 8,
         "ratting":4.5,
         "reviews":[],
@@ -45,10 +48,11 @@
       {
         "id":4,
         "name": "Presidential Suite",
+        "room_no": 115,
         "pricePerNight": 1000,
         "roomSize": "1200 sq ft",
-        "totalSeat": 3,
-        "availableSeat":3,
+        
+        "beds":3,
         "availability": true,
         "ratting":4.5,
          "reviews":[],
@@ -59,10 +63,11 @@
       {
         "id":4,
         "name": "Garden Bungalow",
+        "room_no": 139,
         "pricePerNight": 300,
         "roomSize": "500 sq ft",
-        "totalSeat": 3,
-        "availableSeat":3,
+        
+        "beds":3,
         "availability": true,
         "ratting":4.5,
         "reviews":[],
@@ -73,10 +78,11 @@
       {
         "id":6,
         "name": "Business Suite",
+        "room_no": 302,
         "pricePerNight": 280,
         "roomSize": "450 sq ft",
-        "totalSeat": 3,
-        "availableSeat":3,
+        
+        "beds":3,
         "availability": true,
         "ratting":4.5,
         "reviews":[],

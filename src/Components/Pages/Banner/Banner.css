@@ -5,3 +5,6 @@
     background-size: cover;
     background-blend-mode: overlay;
 }
+.gradient-background {
+    background: url("/images/hotel/banner/banner2.jpg"),linear-gradient( #0088FF, #00FF88);
+  }
