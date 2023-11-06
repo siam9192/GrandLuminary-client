@@ -11,7 +11,9 @@ const Rooms = () => {
         navigate(`/rooms/details/${id}`)
     }
     if(isLoading){
-        return ;
+        return  <div className='max-w-7xl min-h-[80vh] mx-auto flex justify-center items-center'>
+            <span class="loading loading-spinner loading-lg"></span>
+        </div>
     }
     return (
         

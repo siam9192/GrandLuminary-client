@@ -23,10 +23,10 @@ const observer = onAuthStateChanged(auth,currentUser =>{
     if(currentUser){
         setUser(currentUser)
     }
-    // else{
-    //     setUser(null);
-    //     AxiosSecure().post('/api/v1/logout')
-    // }
+    else{
+        setUser(null);
+        // AxiosSecure().post('/api/v1/logout')
+    }
     setLoading(false);
         return ()=> observer();
 })

@@ -2,11 +2,13 @@ import React, { useContext, useState } from 'react';
 import { fireBaseContext } from '../../../../AuthProvider/AuthProvider';
 import { useNavigate,useLocation, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import auth from '../../../../Firebase/firebase.config';
 import './signUp.css'
+import { updateCurrentUser, updateProfile } from 'firebase/auth';
 const SignUp = () => {
             const [toggle,setToggle] = useState(false);
             const [err,setErr] = useState('');
-            const {createUser,handleUser} = useContext(fireBaseContext);
+            const {createUser,logout} = useContext(fireBaseContext);
             const [loading,setLoading] = useState(false);
             const navigate = useNavigate();
           const {state} = useLocation();
@@ -40,16 +42,14 @@ const SignUp = () => {
                 setErr('Password must have minimum one special characters');
                 return;
             }
-            
+            console.log(photoUrl)
         createUser(email,password)
         .then(user => {
-            updateProfile(auth.currentUser,{
-                displayName:name,photoURL:photoUrl
-                 })
-                 handleUser(null)
-               signOut(auth)
-                 setLoading(false)
-                 Swal.fire(
+           updateProfile(auth.currentUser,{
+            displayName:name, photoURL:photoUrl
+           })   
+           logout()
+         Swal.fire(
                     'Good job!',
                     'Registration successful!',
                     'success'
