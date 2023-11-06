@@ -1,5 +1,8 @@
 .news-latter{
-    background-image: url('images/hotel/banner/banner2.jpg'),linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8));
+    /* background-image: url('images/hotel/banner/banner2.jpg'),linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)); */
+    background: linear-gradient(135deg,rgba(84, 78, 78, 0.3),rgba(42, 36, 36, 0.3));
+    backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+   -webkit-backdrop-filter: blur(10px);
     background-position: left;
     background-repeat: no-repeat;
     background-size: 50%;

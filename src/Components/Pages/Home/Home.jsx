@@ -29,8 +29,8 @@ const Home = () => {
             }
               </div>
             </div>
-            <Parallax bgImage='/images/hotel/banner/banner2.jpg' strength={600} bgClassName='gradient-background'>
-            <div className='news-latter grid grid-cols-2 my-10 font-lato min-h-52'>
+            <Parallax bgImage='/images/hotel/banner/banner4.jpg' strength={600} bgClassName='gradient-background'>
+            <div className='news-latter grid grid-cols-2 my-10 font-lato max-w-7xl mx-auto  min-h-52'>
               <div className='py-10 max-w-7xl mx-auto  space-y-4 '>
               <h1 className='text-4xl text-white font-semibold font-lato'>sign up for newsletter</h1>
               <p className='text-white '>Sign up for our mailing list to get latest updates and offers</p>

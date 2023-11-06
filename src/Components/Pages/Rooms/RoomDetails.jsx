@@ -61,7 +61,7 @@ setRoom(data.data)
     <p>Price/room/night starts from</p>
     <h2 className="text-3xl font-semibold text-amber-500 text-end">${room.price}</h2>
     <div className='text-end'>
-    <Link to = {`/rooms/checkout/${room.id}`}>
+    <Link to = {`/rooms/checkout/${room._id}`}>
     <button className='text-white bg-red-500 rounded-md px-9 py-2'>Book room</button>
     </Link>
     </div>
