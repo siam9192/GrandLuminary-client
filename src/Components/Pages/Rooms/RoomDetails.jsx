@@ -28,11 +28,11 @@ setRoom(data.data)
        <div className=''>
          <div className='min-h-[90vh] pb-8 font-pop max-w-7xl mx-auto'>
            
-           <div className='grid grid-cols-3 gap-3 h-[500px]'>
+           <div className=' gap-3 '>
             <div className='col-span-2 border-'>
-                <img src={room.images[image]} alt="" className='w-full h-[500px] rounded-md' />
+                <img src={room.images[image]} alt="" className='w-10/12 h-[500px] rounded-md' />
             </div>
-            <div className='grid grid-cols-2 gap-3'>
+            <div className='flex items-center gap-3 py-3'>
          {
             room.images.map((item,index)=>{
     return <div onClick={()=>{
@@ -47,6 +47,7 @@ setRoom(data.data)
     
          
            </div>
+           
            <div className='pb-2 flex justify-between '><div>
                     <div className='pr-3 border-r-2 border-gray-500'>
                                                      

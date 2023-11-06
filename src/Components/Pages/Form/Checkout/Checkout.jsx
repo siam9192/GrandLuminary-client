@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import './checkout.css'
 import {RxCrossCircled} from 'react-icons/rx'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import GetLoginInfo from '../../../Resuse/GetLogInfo/GetLoginInfo';
 import Swal from 'sweetalert2'
 import AxiosBase from '../../../Axios/AxiosBase';
@@ -9,6 +9,7 @@ const Checkout = () => {
     const [room,setRoom] = useState(null);
     const [startDate, setStartDate] = useState(null);
     const {id} = useParams();
+    const navigate = useNavigate();
     const {user} = GetLoginInfo();
     const [bookingDetails,setBookingDetails] = useState({});
     const currentDate = new Date();
@@ -35,17 +36,28 @@ console.log(new Date().getDay())
  const form = e.target;
  const date = new Date();
  const user_email = user.email;
+ const image = room.images[0];
  const room_id = room._id;
  const price = room.price;
  const check_in_date = e.target.check_in.value;
  const check_out_date = e.target.check_out.value;
  const booking_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
  const notes = e.target.notes.value;
- setBookingDetails({user_email,room_id,price,check_in_date,check_out_date,booking_date,notes})
-  setActiveStatus(true)
-    
+ const booking = {
+    user_email,image,room_id,price,checkInDate,check_out_date,booking_date,notes
+ }
+ setBookingDetails({user_email,image,room_id,price,check_in_date,check_out_date,booking_date,notes})
+ 
+    AxiosBase().post('/api/v1/bookimg',booking)
+    .then(data =>{
+        if(data.data.insertedId){
+            e.target.reset();
+            setActiveStatus(true)
+        }
+       
+    })
     }
-   console.log(bookingDetails)
+//    console.log(bookingDetails)
     return (
         <div className='max-w-7xl mx-auto min-h-[90vh] font-pop grid md:grid-cols-2 grid-cols-1 duration-300'>
             <form action="" onSubmit={submitCheckOut}>
@@ -61,17 +73,17 @@ console.log(new Date().getDay())
                   <div className="flex items-center space-x-4">
                   <div className='flex-1'>
                             <h1 className='text-black my-2'>Check-in Date</h1>
-                        <input type="date" name='check_in' autoComplete='off'  className='w-full py-2 border-2 px-2' />
+                        <input type="date" name='check_in' autoComplete='off' required className='w-full py-2 border-2 px-2' />
                         <div className='flex-1'>
                             <h1 className='text-black my-2'>Check-out Date</h1>
-                        <input type="date" name='check_out' autoComplete='off'  className='w-full py-2 border-2 px-2' />
+                        <input type="date" name='check_out' autoComplete='off' required  className='w-full py-2 border-2 px-2' />
                         </div>
                         </div>
                         
 
                   </div>
                   <div>
-                    <textarea name='notes' className='w-full border-2 resize-none h-52 p-2' placeholder='Notes(optional)'></textarea>
+                    <textarea name='notes' required className='w-full border-2 resize-none h-52 p-2' placeholder='Notes(optional)'></textarea>
                   </div>
                   <button className='text-white bg-black py-3 w-full'>Checkout</button>
                 </div>
@@ -116,6 +128,8 @@ console.log(new Date().getDay())
             <div className='text-2xl text-black absolute top-2 right-2' onClick={()=> {
                 setActiveStatus(false)
                 setBookingDetails({})
+            
+                
             }}> <RxCrossCircled></RxCrossCircled></div>
          
           </div>
