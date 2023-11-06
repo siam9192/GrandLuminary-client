@@ -4,6 +4,8 @@ import {AiOutlineAreaChart} from 'react-icons/ai';
 import {FaUserCheck} from 'react-icons/fa';
 import {BsFillStopwatchFill} from 'react-icons/bs';
 import axios from 'axios';
+import AxiosBase from '../../Axios/AxiosBase';
+import QueryRooms from '../../Axios/Query/QueryRooms';
 const AddPost = () => {
     const [userData,setUserData] = useState({});  
     // const {user} = useContext(fireBaseContext);
@@ -12,7 +14,7 @@ const AddPost = () => {
     const photoInput = useRef();
     const offer = useRef();
 
-  
+  console.log(QueryRooms())
 function addPhoto (){
 
     const find = photos.find(photo => photo === photoInput.current.value);
@@ -29,26 +31,30 @@ return;
     photoInput.current.value=''
 
 }
-const addFeatures = ()=>{
-setFeatures([...features,feature.current.value])
-feature.current.value='';
+const addOffer = ()=>{
+setOffers([...offers,offer.current.value])
+offer.current.value='';
+// console.log("Working")
 }
 
 const handleSubmit = (e)=>{
     e.preventDefault()
     const form = e.target;
-const post = {
+const room = {
     images:photos,
     price: parseInt(form.price.value),
-    room_number: form.room_num.value,
+    ratting: 0,
     room_size: form.room_size.value,
-    bedrooms: form.bedrooms.value,
-    special_offers: offers,
-    total_review : form.total_review.value,
+     total_seats: parseInt(form.total_seats.value),
+     available_seats: 3,
+     special_offers: offers,
+     total_review : 0,
             description:form.description.value
 }
-console.log(post)
-console.log(post)
+console.log(room)
+
+AxiosBase().post('/api/v1/rooms/new',room)
+.then(res => e.target.reset())
 
 }
 
@@ -97,8 +103,8 @@ console.log(post)
         <div className='flex items-center gap-5'>
     
         <div>
-            <label className=''>Room no:</label>
-        <input type="text" name='room_no'  className='w-full py-2 px-2 outline-none border-2' required/> 
+            <label className=''>Total seat:</label>
+        <input type="text" name='total_seats'  className='w-full py-2 px-2 outline-none border-2' required/> 
         </div>
         </div>
        < div className='flex items-center gap-5'>
@@ -111,15 +117,8 @@ console.log(post)
         <input type="text" name='room_size'  className='w-full py-2 px-2 outline-none border-2' required/> 
         </div>
         </div>
-        <div className='flex justify-between items-center gap-5'>
-        <div className=''>
-            <label className=''>Bedrooms:</label>
-        <input type="number" name='bedrooms'  className='w-full py-2 px-2 outline-none border-2' required/> 
-        </div>
         
-        </div>
     
-        
         <div >
             <div className='py-3'>
                 <h1 className=''>Features:</h1> <div className='grid grid-cols-1 md:grid-cols-2 gap-3 '> {
@@ -129,7 +128,7 @@ console.log(post)
                 })}</div>
                 </div>
             <label className=''>Add Features:</label>
-        <div className='flex items-center'><input type="text" name='features' ref={offer} className='w-full py-2 px-2 outline-none border-2'/> <button className='btn  btn-primary' onClick={addFeatures}>+</button></div>
+        <div className='flex items-center'><input type="text" name='features' ref={offer} className='w-full py-2 px-2 outline-none border-2'/> <button className='btn  btn-primary' onClick={addOffer}>+</button></div>
         </div>
         <div className=''><label htmlFor="">Description</label>
         <textarea name="description" id="" placeholder='write something about your properties' className='w-full py-2 px-2 outline-none border-2 resize-none h-32' required>
