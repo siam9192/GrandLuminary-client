@@ -15,8 +15,8 @@ const Navbar = () => {
             <nav>
                <ul className='flex items-center gap-2 black text-xl'>
  <NavLink to= '/'>Home</NavLink>
- <NavLink>Rooms</NavLink>
- <NavLink>My Bookings</NavLink>
+ <NavLink to='/rooms'>Rooms</NavLink>
+ <NavLink to='/mybooking'>My Bookings</NavLink>
  <NavLink to='/about'>About us</NavLink>
  {
     !user ? <>
