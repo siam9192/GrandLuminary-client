@@ -3,6 +3,7 @@ import Rating from 'react-rating';
 import {AiFillStar,AiOutlineStar} from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom';
 import QueryRooms from '../../Axios/Query/QueryRooms';
+import AddReview from '../../Reviews/AddReview';
 const Rooms = () => {
    
     const navigate = useNavigate();
@@ -80,6 +81,7 @@ const Rooms = () => {
                 }
                 
             </div>
+            <AddReview></AddReview>
             </div>
           
         </div>

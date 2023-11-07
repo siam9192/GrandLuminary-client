@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 // import Rating from "react-rating";
 import AddReview from "./AddReview";
 import Review from "./Review";
+import AxiosBase from "../Axios/AxiosBase";
 
 const Reviews = () => {
     const [reviews,setReviews] = useState([]);
     useEffect(()=>{
-        fetch('/reviews.json')
-        .then(res => res.json())
-        .then(data => setReviews(data))
+        AxiosBase().get('/api/v1/reviews')
+        .then(res => setReviews(res.data))
     },[])
-console.log(reviews)
+
 
 const submitReview = ()=>{
 

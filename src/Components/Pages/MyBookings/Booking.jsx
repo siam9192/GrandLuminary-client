@@ -1,7 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 import Swal from 'sweetalert2';
+import AxiosBase from '../../Axios/AxiosBase';
+import axios from 'axios';
 const Booking = ({booking}) => {
+    
     const handleCancel =()=>{
         const date = new Date();
         const currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
@@ -20,11 +23,18 @@ if(dif >= 1){
         confirmButtonText: "i'm sure!"
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-            title: "Canceled!",
-            text: "Your booking has been canceled.",
-            icon: "success"
-          });
+            // axios.delete(`http://localhost:5000/api/v1/bookings/cancel/${booking._id}`)
+            AxiosBase().delete(`/api/v1/booking/delete/${booking._id}`)
+            .then(res =>{
+                if(res.data.deletedCount){
+                    Swal.fire({
+                        title: "Canceled!",
+                        text: "Your booking has been canceled.",
+                        icon: "success"
+                      });
+                }
+            })
+          
         }
       });
 }

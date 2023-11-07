@@ -19,7 +19,7 @@ const Checkout = () => {
    
 console.log(new Date().getDay())
     useEffect(()=>{
-       AxiosBase().get(`/api/v1/room/${id}`)
+       AxiosBase().get(`/api/v1/room?id=${room.id}`)
         .then(data => {
         setRoom(data.data)
         })
@@ -96,50 +96,7 @@ console.log(new Date().getDay())
             <div>
                 <img src="/images/Form/checkout.jpg" alt="" />
             </div>
-
-            <div className={`checkout-pop flex justify-center ${activeStatus ? "block":"hidden"} py-20 font-pop `}>
-             <div className="bg-white w-1/3 rounded-lg p-5 relative ">
-                <div className=''>
-                    <div className='flex justify-center'><img src="/images/Form/sucess.png" alt="" className='w-20' /></div>
-                    <h1 className='text-black text-2xl text-center py-2'>Booking successful</h1>
-                </div>
-             <h1 className='text-3xl text-black'>Booking summery</h1>
-          <div className=' '>
-            <div className='flex justify-between'>
-          <h1 className='text-xl py-2'>Hotel room no: </h1> <h1 className='text-xl py-2 text-black'>{bookingDetails.room_no} </h1>
-          </div>
-         
-        
-          <div className='flex justify-between'>
-          <h1 className='text-xl py-2'>Check-in Date:</h1> <h1 className='text-xl py-2 text-black'>{bookingDetails.check_in_date} </h1>
-          </div>
-          <div className='flex justify-between'>
-          <h1 className='text-xl py-2'>Check-out Date:</h1> <h1 className='text-xl py-2 text-black'>{bookingDetails.check_out_date} </h1>
-          </div>
-          <div className='flex justify-between'>
-          <h1 className='text-xl py-2'>Booking Date:</h1> <h1 className='text-xl py-2 text-black'>{bookingDetails.booking_date} </h1>
-          </div>
-          <div className='flex justify-between'>
-          <h1 className='text-xl py-2'>Price (per/night):</h1> <h1 className='text-xl py-2 text-black'>{bookingDetails.price} </h1>
-          </div>
-          
-          
-          <div className='flex justify-between'>
-          </div>
-
-          <div>
-            
-            <div className='text-2xl text-black absolute top-2 right-2' onClick={()=> {
-                setActiveStatus(false)
-                setBookingDetails({})
-            
-                
-            }}> <RxCrossCircled></RxCrossCircled></div>
-         
-          </div>
-             </div>
-            </div>
-        </div>
+ 
         </div>
     );
 }
