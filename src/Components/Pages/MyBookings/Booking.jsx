@@ -3,15 +3,24 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import AxiosBase from '../../Axios/AxiosBase';
 import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const Booking = ({booking}) => {
-    
+    const [room,setRoom] = useState({})
+    useEffect(()=>{
+        AxiosBase().get(`/api/v1/room/get?id=${booking.room_id}`)
+        .then(res => setRoom(res.data))
+    },[])
+
+console.log(room)
     const handleCancel =()=>{
         const date = new Date();
         const currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
         
         const date1 = moment(currentDate);
 const date2 = moment(booking.check_in_date);
-const dif = date2.diff(date1,'days')
+const dif = date2.diff(date1,'days');
+const available_seats = room.available_seats+1;
 if(dif >= 1){
     Swal.fire({
         title: "Are you sure?",
@@ -23,18 +32,22 @@ if(dif >= 1){
         confirmButtonText: "i'm sure!"
       }).then((result) => {
         if (result.isConfirmed) {
-            // axios.delete(`http://localhost:5000/api/v1/bookings/cancel/${booking._id}`)
-            AxiosBase().delete(`/api/v1/booking/delete/${booking._id}`)
+        AxiosBase().delete(`/api/v1/booking/delete/${booking._id}`)
+        
             .then(res =>{
-                if(res.data.deletedCount){
-                    Swal.fire({
-                        title: "Canceled!",
-                        text: "Your booking has been canceled.",
-                        icon: "success"
-                      });
-                }
-            })
-          
+                AxiosBase().patch('/api/v1/update-room',{available_seats})
+                .then(res =>{
+                    if(res.data.deletedCount){
+                        Swal.fire({
+                            title: "Canceled!",
+                            text: "Your booking has been canceled.",
+                            icon: "success"
+                          });
+                    }
+                })
+              
+          })
+        
         }
       });
 }

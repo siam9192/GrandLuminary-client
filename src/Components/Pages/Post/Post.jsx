@@ -43,6 +43,7 @@ const handleSubmit = (e)=>{
 const room = {
     images:photos,
     price: parseInt(form.price.value),
+    total_ratting: 0,
     ratting: 0,
     room_size: form.room_size.value,
      total_seats: parseInt(form.total_seats.value),

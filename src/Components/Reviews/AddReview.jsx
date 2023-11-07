@@ -23,22 +23,27 @@ const AddReview = () => {
      }
      },[user])
      useEffect(()=>{
-        AxiosBase().get(`/api/v1/room/${params.id}`)
+        AxiosBase().get(`/api/v1/room?id=${params.id}`)
         .then(res => setRoom(res.data))
      },[])
+     
     const submitReview = (e)=>{
         e.preventDefault()
+        document.getElementById('my_review_1').showModal();
+        const date = new Date();
+        const post_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
    const review_text = e.target.review.value;
    const total_review = room.total_review + 1;
    const total_ratting  = room.total_ratting + userRating;
    const review = {
     user_email : user.email,
+    user_name: user.displayName,
     user_image: user.photoURL,
     room_id: params.id,
     ratting: userRating,
-    review_text
-   }
-   console.log(review_date)
+    review_text,
+    post_date
+}
    const updateRoomData = {
     total_ratting: room.total_ratting + userRating,
     ratting: total_ratting / total_review,
@@ -47,14 +52,17 @@ const AddReview = () => {
    AxiosBase().post('/api/v1/reviews/post',review)
    .then((res)=>{
     if(res.data.insertedId){
-        AxiosBase().patch(`/api/v1/update-room?id=${params.id}`,updateRoomData)
+        AxiosBase().patch(`/api/v1/update-room?id=${params.id}`,updateRoomData);
+        document.getElementById('my_review_1').close();
+        window.location.reload();
     }
    })
   
     }
     return (
+        <>
         <div className={`py-7 ${bookings.length > 0 ? "block" : "hidden"}`}>
-        <h1 className="text-2xl text-black">Your review:</h1>
+        <h1 className="text-2xl text-black pb-5">Post your review:</h1>
     
         <div>
             <div className='flex items-center gap-3'><p className="text-2xl">Ratting:</p><Rating value={userRating} size = "large" onChange={(event,value)=>{
@@ -74,7 +82,13 @@ const AddReview = () => {
                 </form>
             </div>
         </div>
-
+        <dialog id="my_review_1" className="modal">
+  <div className="modal-box">
+   <div className='flex justify-center items-center'> <span className="loading loading-dots loading-lg text-red-600"></span> <br />
+  <h2 className='text-center text-black'>Processing</h2></div> 
+  </div>
+</dialog>
+</>
     );
 }
 

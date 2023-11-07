@@ -9,23 +9,30 @@ import AxiosBase from '../../Axios/AxiosBase';
 import axios from 'axios';
 import { useRef } from 'react';
 import GetLoginInfo from '../../Resuse/GetLogInfo/GetLoginInfo';
+import toast from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import {
+    useQuery,
+  } from '@tanstack/react-query'
+import Swal from 'sweetalert2';
 const RoomDetails = () => {
-    const [room,setRoom] = useState(null);
+    // const [room,setRoom] = useState(null);
     const {user} = GetLoginInfo();
     const [show_review,setShow_review] = useState(false);
     const [image,setImage] = useState(0);
     const {id} = useParams();
     const check_in = useRef(null);
     const [bookingDetails,setBookingDetails] = useState({})
+    const [bookingLoading,setBookingLoading] =  useState(false);
 
-
-    useEffect(()=>{
-AxiosBase().get(`/api/v1/room?id=${id}`)
-.then(data => {
-setRoom(data.data)
+const {data:room,isLoading,refetch} = useQuery({
+    queryKey:['room-details'],
+    queryFn:async()=>{
+        const res = await fetch(`http://localhost:5000/api/v1/room/get?id=${id}`);
+        const data = res.json();
+        return data
+    }
 })
-
-},[])
    
     if(!room){
         return;
@@ -48,7 +55,11 @@ const handleBooking = ()=>{
         AxiosBase().get(`/api/v1/find/booking?check_in_date=${check_in_date}&room_id=${room_id}`)
         .then(res => {
             if(res.data.length > 0){
-              console.log('not avai')
+                Swal.fire({
+                    title: "The room is booked on this date!",
+                    text: "Try on another date.",
+                    icon: "error"
+                  });
               return;
             }
             setBookingDetails(booking)
@@ -59,14 +70,21 @@ const handleBooking = ()=>{
 
 }
 const confrimeBooking = ()=>{
+    setBookingLoading(true)
     AxiosBase().post('/api/v1/booking/new',bookingDetails)
     .then(()=>{
         const available_seats = room.available_seats -1;
-        AxiosBase().patch(`/api/v1/update-room/${room._id}`)
-        .then(()=>{
-            
+        AxiosBase().patch(`/api/v1/update-room?id=${room._id}`,{available_seats})
+        .then((res)=>{
+           if(res.data.modifiedCount > 0){
+            setBookingLoading(false)
+            refetch()
+            document.getElementById('my_modal_1').close()
+            toast.success('Booking successful!')
+           }
         })
     })
+    
   
     
     
@@ -107,7 +125,7 @@ const confrimeBooking = ()=>{
         <p className='text-black'>Check-in date</p>
     <input type="date" ref = {check_in} className='w-72 py-2 border-black border-2 rounded outline-none'/>
     </div>
-    <button className='text-white bg-red-500 rounded-md px-9 py-2' onClick={handleBooking}>Book room</button>
+    <button className={`text-white    ${room.available_seats === 0 ? "bg-[#b5b4b4] " : "bg-red-500"}  rounded-md px-9 py-2 `}disabled = {room.available_seats === 0 ? true : false}  onClick={handleBooking}>Book room</button>
    
     </div>
                         </div></div>
@@ -150,11 +168,12 @@ const confrimeBooking = ()=>{
         <h1 className='text-3xl text-black pb-5'>Our guests reviews:</h1>
         <Reviews></Reviews>
     </div>
-
-     
+    <AddReview></AddReview>
 
 <dialog id="my_modal_1" className="modal">
   <div className="modal-box">
+  {bookingLoading ? <div className='flex justify-center items-center'> <span className="loading loading-dots loading-lg text-red-600"></span> <br />
+  <h2 className='text-center text-black'>Processing</h2></div> :  <div>
    <div className='flex justify-center items-center'>
     <img src="/images/Form/booking.jpg" alt="" className='w-10/12' />
    </div>
@@ -164,24 +183,33 @@ const confrimeBooking = ()=>{
         <h2 className='text-black flex justify-between'>Check in date <p>{bookingDetails.check_in_date}</p></h2>
         <h2 className='text-black flex justify-between'>Booking date <p>{bookingDetails.booking_date}</p></h2>
         <h2 className='text-black flex justify-between'>Price <p>${bookingDetails.price}</p></h2>
+           
+     <div className="flex justify-between gap-5">
+     <button className='px-5 py-2 bg-red-500 text-white' onClick={()=>{
+             document.getElementById('my_modal_1').close()
+            }}>Cancel</button>
+     <button className='px-5 py-2 bg-green-500 text-white' onClick={confrimeBooking}>Confrime</button> 
+     </div>
+      
     </div>
    </div>
     <div className="modal-action">
       <form method="dialog">
-       
-     <div className="flex justify-between gap-5">
-     <button className='px-5 py-2 bg-red-500 text-white' >Cancel</button>
-     <button className='px-5 py-2 bg-green-500 text-white' onClick={confrimeBooking}>Confrime</button> 
-     </div>
+    
       </form>
     </div>
+  </div>
+}
   </div>
 </dialog>
             </div>
             <div>
 
             </div>
-            
+            <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
        </div>
     );
 }
