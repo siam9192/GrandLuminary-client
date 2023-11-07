@@ -5,14 +5,20 @@ import AxiosBase from '../../Axios/AxiosBase';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
-const Booking = ({booking}) => {
-    const [room,setRoom] = useState({})
-    useEffect(()=>{
-        AxiosBase().get(`/api/v1/room/get?id=${booking.room_id}`)
-        .then(res => setRoom(res.data))
-    },[])
-
-console.log(room)
+import {useQuery} from '@tanstack/react-query';
+const Booking = ({booking,refetch}) => {
+    // useEffect(()=>{
+    //     AxiosBase().get(`/api/v1/room/get?id=${booking.room_id}`)
+    //     .then(res => setRoom(res.data))
+    // },[])
+    const {data:room,isLoading,refetch:roomFetch} = useQuery({
+        queryKey:['book-data'],
+        queryFn:async()=>{
+            const res = await fetch(`http://localhost:5000/api/v1/room/get?id=${booking.room_id}`);
+            return await res.json();
+        }
+        })
+ console.log(room)
     const handleCancel =()=>{
         const date = new Date();
         const currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
@@ -35,14 +41,16 @@ if(dif >= 1){
         AxiosBase().delete(`/api/v1/booking/delete/${booking._id}`)
         
             .then(res =>{
-                AxiosBase().patch('/api/v1/update-room',{available_seats})
+                AxiosBase().patch(`/api/v1/update-room?id=${room._id}`,{available_seats})
                 .then(res =>{
-                    if(res.data.deletedCount){
+                    if(res.data.modifiedCount){
                         Swal.fire({
                             title: "Canceled!",
                             text: "Your booking has been canceled.",
                             icon: "success"
                           });
+                          refetch()
+                          roomFetch()
                     }
                 })
               

@@ -3,15 +3,25 @@ import Navbar from '../../Navbar/Navbar';
 import Booking from './Booking';
 import AxiosBase from '../../Axios/AxiosBase';
 import { fireBaseContext } from '../../../AuthProvider/AuthProvider';
-
+import {useQuery} from '@tanstack/react-query';
 const MyBookings = () => {
-    const [bookings,setBookings] = useState([]);
+    // const [bookings,setBookings] = useState([]);
     const {user,loading} = useContext(fireBaseContext);
     useEffect(()=>{
- AxiosBase().get(`/api/v1/bookings?user_email=${user.email}`)
- .then(res => setBookings(res.data))
+ 
+//  .then(res => setBookings(res.data))
     },[])
-    console.log(bookings)
+    const {data:bookings,isLoading,refetch} = useQuery({
+        queryKey:['booking-data'],
+        queryFn:async()=>{
+            const res = await fetch(`http://localhost:5000/api/v1/bookings?user_email=${user.email}`);
+            return await res.json();
+        }
+    })
+ if(isLoading){
+    return;
+ }
+    
     return (
         <div className='max-w-7xl mx-auto font-pop'>
             <Navbar></Navbar>      
@@ -21,7 +31,7 @@ const MyBookings = () => {
                <div className='grid md:grid-cols-2 gap-5'>
                 {
                     bookings.map((booking,index)=>{
-                       return <Booking booking={booking} key = {index}></Booking>
+                       return <Booking booking={booking} refetch= {refetch} key = {index}></Booking>
                     })
                 }
                </div>
