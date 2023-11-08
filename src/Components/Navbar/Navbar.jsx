@@ -3,25 +3,28 @@ import { NavLink } from 'react-router-dom';
 import GetLoginInfo from '../Resuse/GetLogInfo/GetLoginInfo';
 const Navbar = () => {
     const {user,logout} = GetLoginInfo();
-    console.log(user)
+   
     return (
-        <div className='flex items-center justify-between max-w-7xl mx-auto font-rob py-4'>
+        <div className='flex items-center justify-between max-w-7xl mx-auto font-rob py-4 border-b border-black'>
+            
+            <nav className='flex items-center justify-between w-full'>
             <div className='flex items-center gap-2'>
                 <div>
                 <img src="/images/Logo/Logo.png" alt="" className='w-20' />
                 </div>
                 <h1 className='text-black font-bold text-3xl'>Grand Luminary</h1>
             </div>
-            <nav>
-               <ul className='flex items-center gap-2 black text-xl'>
- <NavLink to= '/'>Home</NavLink>
- <NavLink to='/rooms'>Rooms</NavLink>
- <NavLink to='/mybooking'>My Bookings</NavLink>
- <NavLink to='/about'>About us</NavLink>
- {
+               <ul className='flex items-center gap-2 black text-xl text-black'>
+ <NavLink to= '/'>HOME</NavLink>
+ <NavLink to='/rooms'>ROOMS</NavLink>
+ <NavLink to='/mybooking'>MY BOOKINGS</NavLink>
+ <NavLink to='/about'>ABOUT US</NavLink>
+               </ul>
+               <ul className='flex gap-5'>
+               {
     !user ? <>
-    <NavLink to='/signup'>Sign up</NavLink>
-    <NavLink to='/login'>Login</NavLink>
+    <NavLink to='/signup' className='px-6 py-3 bg-black text-white'>SIGN UP</NavLink>
+    <NavLink to='/login' className='px-6 py-3 bg-black text-white'>LOGIN</NavLink>
     </>
     :
     <div className="dropdown dropdown-end ">
@@ -46,8 +49,6 @@ const Navbar = () => {
       </ul>
     </div>
     }
- 
- 
                </ul>
             </nav>
         </div>

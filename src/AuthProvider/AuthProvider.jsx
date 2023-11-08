@@ -1,6 +1,8 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import auth from '../Firebase/firebase.config';
+import { Axios } from 'axios';
+import AxiosBase from '../Components/Axios/AxiosBase';
 // import AxiosSecure from '../Axios/AxiosSecure';
 export const fireBaseContext = createContext(null)
 const AuthProvider = ({children}) => {
@@ -15,7 +17,8 @@ const AuthProvider = ({children}) => {
    return signInWithEmailAndPassword(auth,email,password);
     }
     const logout = ()=>{
-        setUser(null)
+        setUser(null);
+        AxiosBase().post('/api/v1/logout')
         return signOut(auth);
     }
     useEffect(()=>{

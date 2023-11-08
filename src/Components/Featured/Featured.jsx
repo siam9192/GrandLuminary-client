@@ -6,13 +6,13 @@ import './featured.css'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import {GrNext,GrPrevious} from 'react-icons/gr'
+import AxiosBase from '../Axios/AxiosBase';
 const Featured = () => {
     const [featured,setFeatured] = useState([]);
 
     useEffect(()=>{
-  fetch('/rooms.json')
-  .then(res => res.json())
-  .then(data => setFeatured(data))
+  AxiosBase().get('/api/v1/rooms')
+  .then(data => setFeatured(data.data.slice(0,5)))
     },[])
     const settings = {
         dots: true,
@@ -39,6 +39,7 @@ const Featured = () => {
         ]
        
       };
+      console.log(featured)
     return (
         <div className='bg-[rgb(189,238,234) my-10 font-pop'>
               
@@ -50,9 +51,9 @@ const Featured = () => {
                {
                 featured.map((item,index)=>{
                     return <div className=' bg-white shadow-xl ' key={index}>
-                             <img src={item.roomImages[0]} alt="" className='w-full h-72' />
+                             <img src={item.images[0]} alt="" className='w-full h-72' />
                              <div className='px-2'>
-                                <h1 className='text-black text-2xl py-2'>${item.pricePerNight}/Night</h1>
+                                <h1 className='text-black text-2xl py-2'>${item.price}/Night</h1>
                                 <div>
                                     <div className='flex items-center gap-1 my-2'>
                                    <div className='pr-3 border-r-2 border-gray-500'>
@@ -61,7 +62,7 @@ const Featured = () => {
   fullSymbol={<AiFillStar className='text-xl text-amber-400'></AiFillStar>}/>
                                    </div>
                                    <div>
-                                    <p>Review {item.reviews.length}</p>
+                                    <p>Review {item.total_review}</p>
                                    </div>
   </div>
                                 </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Rating from 'react-rating';
 import {AiFillStar,AiOutlineStar} from 'react-icons/ai';
 import Reviews from '../../Reviews/Reviews';
@@ -11,6 +11,8 @@ import { useRef } from 'react';
 import GetLoginInfo from '../../Resuse/GetLogInfo/GetLoginInfo';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import {
     useQuery,
   } from '@tanstack/react-query'
@@ -21,39 +23,62 @@ const RoomDetails = () => {
     const [show_review,setShow_review] = useState(false);
     const [image,setImage] = useState(0);
     const {id} = useParams();
-    const check_in = useRef(null);
     const [bookingDetails,setBookingDetails] = useState({})
     const [bookingLoading,setBookingLoading] =  useState(false);
-
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const date = new Date();
+    const navigate = useNavigate();
+    const current_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    const [check_in,set_check_in ] = useState(null);
+    console.log(useParams())
 const {data:room,isLoading,refetch} = useQuery({
     queryKey:['room-details'],
     queryFn:async()=>{
         const res = await fetch(`http://localhost:5000/api/v1/room/get?id=${id}`);
         const data = res.json();
-        return data
+        return data;
     }
 })
-   
+   useEffect(()=>{
+    const c_d = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+    set_check_in(c_d)
+   },[])
     if(!room){
+       
         return;
     }
 
-
+    const handleDateChange = (date) => {
+        
+      const newDate = new Date(date)
+            const c_d = `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`;
+          setSelectedDate(date);
+          set_check_in(c_d)     
+        
+      };
+   
 const handleBooking = ()=>{
-    const date = new Date();
+    if(!user){
+        navigate('/login')
+    }
     const user_email = user.email;
     const image = room.images[0];
     const room_id = room._id;
     const price = room.price;
-    const check_in_date = check_in.current.value;
-    const booking_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    const check_in_date = check_in;
+    const booking_date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+    console.log(booking_date)
     const booking = {
        user_email,image,room_id,price,check_in_date,booking_date
     }
-
+    console.log(booking)
+    
     if(room.available_seats > 0){
+       
         AxiosBase().get(`/api/v1/find/booking?check_in_date=${check_in_date}&room_id=${room_id}`)
         .then(res => {
+            console.log(check_in_date)
+            console.log(res.data)
             if(res.data.length > 0){
                 Swal.fire({
                     title: "The room is booked on this date!",
@@ -90,6 +115,7 @@ const confrimeBooking = ()=>{
     
 }
 
+
     return (
        <div className=''>
          <div className='min-h-[90vh] pb-8 font-pop max-w-7xl mx-auto'>
@@ -105,7 +131,7 @@ const confrimeBooking = ()=>{
         setImage(index)
     }}>
     
-                    <img src={item} alt="" className={` rounded-md h-32 border-red-500 ${image === index && "border-4"}`}/>
+                    <img src={item} alt="" className={` rounded-md h-32 border-black ${image === index && "border-4"}`}/>
                 </div>
             })
          }
@@ -122,15 +148,30 @@ const confrimeBooking = ()=>{
     
     <div className='flex items-center gap-5'>
     <div className='flex items-center gap-1'>
-        <p className='text-black'>Check-in date</p>
-    <input type="date" ref = {check_in} className='w-72 py-2 border-black border-2 rounded outline-none'/>
+    <div>
+    <p className='text-black'>Check-in date</p>
+      <DatePicker
+        showIcon
+        selected={selectedDate}
+        onChange={handleDateChange}
+        minDate={new Date()} // Set minimum date to today
+        className='w-72 py-3 border-black border-2 rounded outline-none'
+      />
     </div>
-    <button className={`text-white    ${room.available_seats === 0 ? "bg-[#b5b4b4] " : "bg-red-500"}  rounded-md px-9 py-2 `}disabled = {room.available_seats === 0 ? true : false}  onClick={handleBooking}>Book room</button>
+       
+    
+    </div> 
+   <div className='mt-5'>
+   <button className={`text-white    ${room.available_seats === 0 ? "bg-[#b5b4b4] " : "bg-red-500"}  rounded-md px-9 py-2 `}disabled = {room.available_seats === 0 ? true : false}  onClick={handleBooking}>Book room</button>
    
+   </div>
     </div>
                         </div></div>
            <div className='grid grid-cols-3 gap-5 py-9 '>
            <div className=' border-2 border-black rounded-lg p-5'>
+           <div className='flex justify-between items-center  '>
+      <h3 className='text-xl  text-black'>Room size:</h3> <h3>{room.room_size} Sqft</h3>
+      </div>
       <div className='flex justify-between items-center  '>
       <h3 className='text-xl  text-black'>Total seat:</h3> <h3>{room.total_seats}</h3>
       </div>
@@ -151,24 +192,30 @@ const confrimeBooking = ()=>{
     
     </div>
     <div>
-    <h1 className='text-3xl text-black pb-5'>Special Offers:</h1>
-    <div className=' grid md:grid-cols-2 gap-5 py-8'>
-         {
-            room.special_offers.map((item,index)=>{
-              return  <div className='border-2 border-black p-5 rounded-lg' key={index}>
-                    {
-                        item
-                    }
-                </div>
-            })
-         }
-    </div>
+    <h1 className='text-3xl text-black pb-5 flex items-center gap-2'>Special <p className='text-green-600'> offers:</p></h1>
+    {
+        room.special_offers.length  > 0 ? <div className=' grid md:grid-cols-2 gap-5 py-8'>
+        {
+           room.special_offers.map((item,index)=>{
+             return  <div className='border-2 border-black p-5 rounded-lg' key={index}>
+                   {
+                       item
+                   }
+               </div>
+           })
+        }
+   </div>
+   :
+   <div className='min-h-[20vh] flex justify-center items-center'>
+   <h1 className='text-3xl text-black mt-7 text-center flex items-center gap-2'>No offer <p className='text-red-500'>available</p></h1>
+   </div>
+    }
     </div>
     <div>
         <h1 className='text-3xl text-black pb-5'>Our guests reviews:</h1>
         <Reviews></Reviews>
     </div>
-    <AddReview></AddReview>
+  
 
 <dialog id="my_modal_1" className="modal">
   <div className="modal-box">

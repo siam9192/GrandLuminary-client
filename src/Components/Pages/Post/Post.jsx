@@ -47,7 +47,7 @@ const room = {
     ratting: 0,
     room_size: form.room_size.value,
      total_seats: parseInt(form.total_seats.value),
-     available_seats: 3,
+     available_seats: parseInt(form.total_seats.value),
      special_offers: offers,
      total_review : 0,
             description:form.description.value
@@ -55,7 +55,11 @@ const room = {
 console.log(room)
 
 AxiosBase().post('/api/v1/rooms/new',room)
-.then(res => e.target.reset())
+.then(res =>{
+    e.target.reset();
+    setPhotos([])
+    setOffers([])
+})
 
 }
 

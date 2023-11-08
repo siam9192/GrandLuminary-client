@@ -7,13 +7,12 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import {useQuery} from '@tanstack/react-query';
 import { useRef } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 const Booking = ({booking,refetch}) => {
-    // useEffect(()=>{
-    //     AxiosBase().get(`/api/v1/room/get?id=${booking.room_id}`)
-    //     .then(res => setRoom(res.data))
-    // },[])
+   const [selectedValue,setSelectedValue] = useState(new Date(booking.check_in_date))
     const [isUpdating,setUpdating] = useState(false);
-    const inputCheck_in = useRef(null);
+   const [check_in_value,set_check_in_value] = useState(booking.check_in_date)
     const {data:room,isLoading,refetch:roomFetch} = useQuery({
         queryKey:['book-data'],
         queryFn:async()=>{
@@ -21,16 +20,34 @@ const Booking = ({booking,refetch}) => {
             return await res.json();
         }
         })
- console.log(room)
+        const handleDateChange = (date) => {
+        
+          const newDate = new Date(date)
+                const c_d = `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`;
+              // setSelectedDate(date);
+              set_check_in_value(c_d)  
+              console.log(c_d)
+              setSelectedValue(new Date(date))  
+            
+          };
+          
     const handleCancel =()=>{
         const date = new Date();
-        const currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+        const currentDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
         
         const date1 = moment(currentDate);
 const date2 = moment(booking.check_in_date);
 const dif = date2.diff(date1,'days');
 const available_seats = room.available_seats+1;
-if(dif >= 1){
+console.log(dif + 1)
+if(dif <=0){
+  Swal.fire({
+    title: "You can not cancel it right now",
+    text: "Cancel date expired.",
+    icon: "error"
+  });
+}
+if(dif > 0){
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to cancel this!",
@@ -67,25 +84,43 @@ if(dif >= 1){
         document.getElementById('my_update').showModal()
     }
     const handleUpdate = ()=>{
-    if(inputCheck_in.current.value === booking.check_in_date){
+    if(check_in_value === booking.check_in_date){
+       Swal.fire({
+                    title: "The room is booked on this date!",
+                    text: "Try on another date.",
+                    icon: "error"
+                  });
        return;
     }
     setUpdating(true)
-AxiosBase().patch(`/api/v1/booking/update?id=${booking._id}`,{check_in_date: inputCheck_in.current.value})
-.then((res)=>{
-if(res.data){
-    if(res.data.modifiedCount>0){
-        Swal.fire({
-            title: "Updated!",
-            text: "Your booking has been updated.",
-            icon: "success"
-          });
-    }
-}
-refetch()
-document.getElementById('my_update').close()
-setUpdating(false)
-})
+    
+    AxiosBase().get(`/api/v1/find/booking?check_in_date=${check_in_value}&room_id=${booking.room_id}`)
+    .then((res)=>{
+      // console.log(inputCheck_in.current.value)
+     if(res.data.length !== 0){
+      console.log(0)
+      return;
+      
+     }
+    console.log(check_in_value)
+     AxiosBase().patch(`/api/v1/booking/update?id=${booking._id}`,{check_in_date: check_in_value})
+     .then((res)=>{
+     if(res.data){
+         if(res.data.modifiedCount>0){
+             Swal.fire({
+                 title: "Updated!",
+                 text: "Your booking has been updated.",
+                 icon: "success"
+               });
+               refetch()
+         }
+     }
+     
+     document.getElementById('my_update').close()
+     setUpdating(false)
+     })
+    })
+
     }
     return (
         <>
@@ -95,8 +130,7 @@ setUpdating(false)
             <div className='flex-grow pb-4'>
             <h1 className='flex items-center text-2xl text-black'>${booking.price} <p className='text-xl'>(per/night)</p></h1>
                 <h1 className='flex text-black'>Check-in date: {booking.check_in_date}</h1>
-                <h1 className='flex text-black'>Check-out date: ${booking.check_out_date}</h1>
-                <h1 className='flex text-black'>Booking date: ${booking.booking_date}</h1>
+                <h1 className='flex text-black'>Booking date: {booking.booking_date}</h1>
             </div>
             <div className='flex gap-3'><button className=' bg-transparent border-blue-700 hover:bg-black hover:text-white py-1 px-5 border-2 rounded-full ' onClick={openUpdate}>Update</button><button className=' bg-transparent border-red-500 py-1 px-5 border-2 rounded-full hover:bg-black hover:text-white' onClick={handleCancel}>Cancel</button></div>
             </div>
@@ -115,7 +149,16 @@ setUpdating(false)
               <div className='flex  items-center mb-10'>
               <div>
               <p className='py-2 text-black'>Select your new check in date</p>
-                <input type="date" ref={inputCheck_in} defaultValue={booking.check_in_date} className='w-full border-2 border-black rounded py-3 '/>
+                {/* <input type="date" defaultValue={booking.check_in_date} className='w-full border-2 border-black rounded py-3 ' onChange={(e)=>{
+                  set_check_in_value(e.target.value)
+                }}/> */}
+              <DatePicker
+        showIcon
+        selected={selectedValue}
+        onChange={handleDateChange}
+        minDate={new Date()} // Set minimum date to today
+        className='w-72 py-3 border-black border-2 rounded outline-none'
+      />
               </div>
                 </div>
               

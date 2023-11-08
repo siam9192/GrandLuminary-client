@@ -5,6 +5,8 @@ import './Home.css'
 import Featured from '../../Featured/Featured';
 import {FiMail} from 'react-icons/fi';
 import Footer from '../../Footer/Footer';
+// import {Swiper,Swiperslider} from 'swiper/react';
+import Testimonals from '../Testimonals/Testimonals';
 const Home = () => {
   const [reviews,setReviews] = useState([]);
   useEffect(()=>{
@@ -19,20 +21,11 @@ const Home = () => {
            <Featured></Featured>
          
             {/* why chose us sections */}
-            <div className='grid md:grid-cols-2 max-w-7xl mx-auto'>
-              <div>
-                <h1 className='text-3xl text-black  font-semibold font-pop py-2'>Why chose us</h1>
-                 <p>Unmatched Hospitality: Our dedicated team is committed to making your visit memorable. Expect warm welcomes and personalized attention from the moment you arrive.Prime Location: Situated in the heart of [Your Location], we offer convenience and easy access to top attractions, restaurants, and business hubs.Luxurious Accommodations: Our well-appointed rooms and suites are designed for your comfort and relaxation, offering modern amenities and elegance.Luxurious Accommodations: Our well-appointed rooms and suites are designed for your comfort and relaxation, offering modern amenities and elegance.Wellness and Relaxation: Rejuvenate your body and mind in our spa and fitness facilities, where you can pamper yourself with spa treatments or stay active in our state-of-the-art fitness center.</p>
-              </div>
-              <div>
-              {
-            }
-              </div>
-            </div>
+            <Testimonals></Testimonals>
             <Parallax bgImage='/images/hotel/banner/banner4.jpg' strength={600} bgClassName='gradient-background'>
             <div className='news-latter grid grid-cols-2 my-10 font-lato max-w-7xl mx-auto  min-h-52'>
               <div className='py-10 max-w-7xl mx-auto  space-y-4 '>
-              <h1 className='text-4xl text-white font-semibold font-lato'>sign up for newsletter</h1>
+              <h1 className='text-4xl text-blue-600 font-semibold font-lato'>sign up for newsletter</h1>
               <p className='text-white '>Sign up for our mailing list to get latest updates and offers</p>
               <div className='  text-white bg-transparent border-2 border-white placeholder:text-white pr-2 pl-5 py-3 outline-none rounded-md flex items-center gap-1'>
                 <FiMail className=' text-xl text-white top-3 '></FiMail>

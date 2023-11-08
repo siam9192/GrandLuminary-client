@@ -2,6 +2,7 @@ import React from 'react';
 import { useState,useContext } from 'react';
 import { useLocation,useNavigate,Link } from 'react-router-dom';
 import { fireBaseContext } from '../../../../AuthProvider/AuthProvider';
+import AxiosBase from '../../../Axios/AxiosBase';
 const Login = () => {
     const {login} = useContext(fireBaseContext);
     const [toggle,setToggle] = useState(false);
@@ -19,12 +20,8 @@ const Login = () => {
         const password = form.password.value;
 login(email,password)
 .then(res=>{
-    // axios.post('http://localhost:5000/jwt',{
-    //     email:res.user.email
-    // },{
-    //     withCredentials:true
-    // })
-
+    console.log(res.user.email)
+AxiosBase().post(`/api/v1/jwt`,{email:res.user.email})
 setLoading(false)
 if(state){
     navigate(state);

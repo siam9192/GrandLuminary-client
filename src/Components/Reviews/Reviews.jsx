@@ -15,7 +15,9 @@ const Reviews = () => {
         .then(res => setReviews(res.data))
     },[])
 
-
+const handleReviews = (review)=>{
+setReviews(review)
+}
     return (
         <>
       {
@@ -26,10 +28,11 @@ return <Review review={review}></Review>
    })
         }
     </div>:
-<div>
+<div className="min-h-[20vh]">
     <h1 className="text-center text-black text-3xl">No reviews</h1>
 </div>
       }
+      <AddReview reviews = {reviews} setReviews = {handleReviews}></AddReview>
       
         </>
     );

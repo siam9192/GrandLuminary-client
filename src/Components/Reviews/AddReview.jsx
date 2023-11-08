@@ -3,7 +3,7 @@ import { Rating } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import GetLoginInfo from '../Resuse/GetLogInfo/GetLoginInfo';
 import AxiosBase from '../Axios/AxiosBase';
-const AddReview = () => {
+const AddReview = ({reviews,setReviews}) => {
     const params = useParams();
     const {user} = GetLoginInfo();
     const [userRating,setUserRating] = useState(1);
@@ -11,21 +11,30 @@ const AddReview = () => {
     const [room,setRoom] = useState({});
     const date = new Date()
     const review_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+
     useEffect(()=>{
-     if(user){
-          
-        AxiosBase().get(`/api/v1/bookings?user_email=${user.email}&room_id=${params.id}`)
+     if(user ){
+          AxiosBase().get(`/api/user/review?user_email=${user.email}&room_id=${params.id}`)
+          .then(res=>{
+            console.log(res.data)
+            if(res.data.length ===  0){
+                
+                AxiosBase().get(`/api/v1/bookings?user_email=${user.email}&room_id=${params.id}`)
      .then(res =>{
         setBooking(res.data)
        
      })
+            }
+          })
+        
      
      }
-     },[user])
+     },[user,reviews])
      useEffect(()=>{
-        AxiosBase().get(`/api/v1/room?id=${params.id}`)
+        AxiosBase().get(`/api/v1/room/get/?id=${params.id}`)
         .then(res => setRoom(res.data))
      },[])
+    
      
     const submitReview = (e)=>{
         e.preventDefault()
@@ -54,7 +63,7 @@ const AddReview = () => {
     if(res.data.insertedId){
         AxiosBase().patch(`/api/v1/update-room?id=${params.id}`,updateRoomData);
         document.getElementById('my_review_1').close();
-        window.location.reload();
+        setReviews ([...reviews,review])
     }
    })
   
