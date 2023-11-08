@@ -124,9 +124,9 @@ if(dif > 0){
     }
     return (
         <>
-        <div className='border-2 flex justify-between   gap-1'>
-            <div><img src={booking.image} alt="" className='w-60 h-52'/></div>
-            <div className='p-2 h-full flex flex-col'>
+        <div className='border-2 md:flex justify-between   gap-1'>
+            <div><img src={booking.image} alt="" className='md:w-60  w-full md:h-52'/></div>
+            <div className='p-2 md:h-full flex flex-col'>
             <div className='flex-grow pb-4'>
             <h1 className='flex items-center text-2xl text-black'>${booking.price} <p className='text-xl'>(per/night)</p></h1>
                 <h1 className='flex text-black'>Check-in date: {booking.check_in_date}</h1>

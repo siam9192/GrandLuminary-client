@@ -24,16 +24,18 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
 const observer = onAuthStateChanged(auth,currentUser =>{
     if(currentUser){
-        setUser(currentUser)
+        setUser(currentUser);
+       
     }
     else{
         setUser(null);
-        // AxiosSecure().post('/api/v1/logout')
+        AxiosBase().post('/api/v1/logout')
     }
     setLoading(false);
         return ()=> observer();
 })
     },[])
+  
     return (
         <div>
            <fireBaseContext.Provider value={{user,loading,createUser,login,logout}}>

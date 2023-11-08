@@ -23,7 +23,7 @@ const Rooms = () => {
     }
     return (
         
-        <div className='min-h-[90vh]  font-pop mb-2 max-w-7xl mx-auto'>
+        <div className='min-h-[90vh]  font-pop mb-2 max-w-7xl mx-auto lg:px-0 px-2'>
             <div className=''>
             <div className='grid lg:grid-cols-4 grid-cols-2 gap-5  pb-2 border-b-2 pt-1  '>
                
@@ -56,7 +56,7 @@ const Rooms = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pt-5'>
                 {
                     rooms.map((room,index)=>{
-                            return <div className=' bg-white hover:cursor-pointer' key={index} onClick={()=>{
+                            return <div className=' bg-white hover:cursor-pointer border-2' key={index} onClick={()=>{
                                 changeRoute(room._id)
                             }}>
                                      <img src={room.images[0]} alt="" className='w-full h-72' />

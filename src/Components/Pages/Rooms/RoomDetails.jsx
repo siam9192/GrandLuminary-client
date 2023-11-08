@@ -118,20 +118,20 @@ const confrimeBooking = ()=>{
 
     return (
        <div className=''>
-         <div className='min-h-[90vh] pb-8 font-pop max-w-7xl mx-auto'>
+         <div className='min-h-[90vh] pb-8 font-pop max-w-7xl mx-auto lg:px-0 px-2'>
            
            <div className=' gap-3 '>
             <div className='col-span-2 border-'>
-                <img src={room.images[image]} alt="" className='w-10/12 h-[500px] rounded-md' />
+                <img src={room.images[image]} alt="" className='md:w-10/12 md:h-[500px] w-full md:rounded-md' />
             </div>
-            <div className='flex items-center gap-3 py-3'>
+            <div className='flex items-center flex-wrap gap-3 py-3'>
          {
             room.images.map((item,index)=>{
     return <div onClick={()=>{
         setImage(index)
     }}>
     
-                    <img src={item} alt="" className={` rounded-md h-32 border-black ${image === index && "border-4"}`}/>
+                    <img src={item} alt="" className={` md:rounded-md h-32 border-black ${image === index && "border-4"}`}/>
                 </div>
             })
          }
@@ -140,13 +140,13 @@ const confrimeBooking = ()=>{
          
            </div>
            
-           <div className='pb-2 flex justify-between py-6'><div>
+           <div className='pb-2 md:flex justify-between py-6'><div>
            <p>Price/room/night starts from</p>
     <h2 className="text-3xl font-semibold text-amber-500 ">${room.price}</h2>
                     </div>
                     <div>
     
-    <div className='flex items-center gap-5'>
+    <div className='md:flex items-center gap-5'>
     <div className='flex items-center gap-1'>
     <div>
     <p className='text-black'>Check-in date</p>
@@ -167,7 +167,7 @@ const confrimeBooking = ()=>{
    </div>
     </div>
                         </div></div>
-           <div className='grid grid-cols-3 gap-5 py-9 '>
+           <div className='grid lg:grid-cols-3 gap-5 py-9 '>
            <div className=' border-2 border-black rounded-lg p-5'>
            <div className='flex justify-between items-center  '>
       <h3 className='text-xl  text-black'>Room size:</h3> <h3>{room.room_size} Sqft</h3>
@@ -185,7 +185,7 @@ const confrimeBooking = ()=>{
       <h3 className='text-xl  text-black'>Price:</h3> <h3>${room.price}</h3>
       </div>
         </div>
-        <div className='col-span-2 p-5 border-black rounded-lg border-2'>
+        <div className='md:col-span-2 p-5 border-black rounded-lg border-2'>
             <p className='text-black font-semibold'>Description:</p>
             <p className='text-black'>{room.description}</p>
         </div>

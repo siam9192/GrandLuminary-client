@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {GrNext,GrPrevious} from 'react-icons/gr'
 import AxiosBase from '../Axios/AxiosBase';
+import { Link } from 'react-router-dom';
 const Featured = () => {
     const [featured,setFeatured] = useState([]);
 
@@ -46,14 +47,14 @@ const Featured = () => {
         
         <div className='py-5 max-w-7xl mx-auto px-5'>
               <h1 className='text-3xl text-black font-semibold font-lato py-3'>Featured rooms for you</h1>
-              <div className=' gap-5  bg-white rounded-lg '>
-                <Slider {...settings}>
+              <div className=' gap-5 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  bg-white rounded-lg '>
+              
                {
                 featured.map((item,index)=>{
-                    return <div className=' bg-white shadow-xl ' key={index}>
+                    return <div className=' ' key={index}>
                              <img src={item.images[0]} alt="" className='w-full h-72' />
                              <div className='px-2'>
-                                <h1 className='text-black text-2xl py-2'>${item.price}/Night</h1>
+                                <h1 className='text-black text-2xl py-2'>${item.price}/night</h1>
                                 <div>
                                     <div className='flex items-center gap-1 my-2'>
                                    <div className='pr-3 border-r-2 border-gray-500'>
@@ -65,12 +66,13 @@ const Featured = () => {
                                     <p>Review {item.total_review}</p>
                                    </div>
   </div>
+  <Link to = {`/rooms/details/${item._id}`}><button className='w-full bg-black py-2 text-white'>Book now</button></Link>
                                 </div>
                              </div>
                     </div>
                 })
                }
-               </Slider>
+              
               </div>
               </div>
               </div>

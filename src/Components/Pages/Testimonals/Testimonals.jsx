@@ -26,11 +26,13 @@ const Testimonals = () => {
           <h1 className='text-3xl text-black  font-semibold font-pop py-2'>Why chose us</h1>
            <p>Unmatched Hospitality: Our dedicated team is committed to making your visit memorable. Expect warm welcomes and personalized attention from the moment you arrive.Prime Location: Situated in the heart of [Your Location], we offer convenience and easy access to top attractions, restaurants, and business hubs.Luxurious Accommodations: Our well-appointed rooms and suites are designed for your comfort and relaxation, offering modern amenities and elegance.Luxurious Accommodations: Our well-appointed rooms and suites are designed for your comfort and relaxation, offering modern amenities and elegance.Wellness and Relaxation: Rejuvenate your body and mind in our spa and fitness facilities, where you can pamper yourself with spa treatments or stay active in our state-of-the-art fitness center.</p>
         </div>
-        <div className='py-20'>
-        
+        <div className=' border-2 border-black'>
+        <h1 className='text-black text-3xl  font-semibold px-8 '>User testimonials</h1>
+          <div className='p-6'>
         <Swiper
         navigation={true}
             pagination={{ clickable: true }}
+           
       autoplay={{ delay: 3000 }}
       modules={[Navigation]}
     >
@@ -49,7 +51,9 @@ const Testimonals = () => {
                </SwiperSlide>
                 })
             }
+            
             </Swiper>
+            </div>
         </div>
       </div>
     );

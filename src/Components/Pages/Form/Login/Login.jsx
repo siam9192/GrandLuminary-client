@@ -20,14 +20,15 @@ const Login = () => {
         const password = form.password.value;
 login(email,password)
 .then(res=>{
-    console.log(res.user.email)
+    console.log(res.user)
 AxiosBase().post(`/api/v1/jwt`,{email:res.user.email})
 setLoading(false)
 if(state){
     navigate(state);
 }
 else{
-    navigate('/')
+    // navigate('/')
+
 }
 })
 .catch(error =>{

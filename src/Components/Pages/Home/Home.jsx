@@ -7,6 +7,8 @@ import {FiMail} from 'react-icons/fi';
 import Footer from '../../Footer/Footer';
 // import {Swiper,Swiperslider} from 'swiper/react';
 import Testimonals from '../Testimonals/Testimonals';
+import Offers from '../../Offers/Offers';
+import { Helmet } from 'react-helmet';
 const Home = () => {
   const [reviews,setReviews] = useState([]);
   useEffect(()=>{
@@ -16,12 +18,15 @@ const Home = () => {
   },[])
     return (
         <div>
+          <Helmet>
+            <title>Grand Luminary||HOME</title>
+          </Helmet>
             <Banner></Banner>
          
            <Featured></Featured>
-         
+         <Offers></Offers>
             {/* why chose us sections */}
-            <Testimonals></Testimonals>
+            {/* <Testimonals></Testimonals> */}
             <Parallax bgImage='/images/hotel/banner/banner4.jpg' strength={600} bgClassName='gradient-background'>
             <div className='news-latter grid grid-cols-2 my-10 font-lato max-w-7xl mx-auto  min-h-52'>
               <div className='py-10 max-w-7xl mx-auto  space-y-4 '>

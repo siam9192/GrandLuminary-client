@@ -1,0 +1,16 @@
+/* Custom styles for Swiper navigation buttons */
+.swiper-button-prev {
+    background-color: black;
+     padding: 20px 20px;
+
+    color: #fff;
+  }
+  
+  .swiper-button-next {
+    padding: 20px 20px;
+    background-color: black;
+    color: #fff;
+  }
+  
+  /* You can add more styling as needed */
+  
