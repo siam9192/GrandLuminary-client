@@ -14,7 +14,7 @@ const Offers = () => {
         .then(res=> res.json())
         .then(data => setOffers(data))
     },[])
-    console.log(offers)
+  
     return (
         <div className='max-w-7xl mx-auto font-pop py-2'>
             <h1 className='text-black text-3xl font-semibold py-3 flex gap-2 items-center'>Special offers and <p className='text-red-500 '>promotion</p></h1>
@@ -23,7 +23,7 @@ const Offers = () => {
         
             pagination={{ clickable: true }}
             autoplay={{
-                delay: 5000,
+                delay: 2000,
                 disableOnInteraction: true,
               }}
   

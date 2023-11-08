@@ -11,12 +11,15 @@ import MyBookings from '../Pages/MyBookings/MyBookings';
 import About from '../Pages/About/About';
 import AddPost from '../Pages/Post/Post';
 import PrivateRoutes from '../PrivateRoutes/PrivateRoutes';
+import ErrorPage from '../Pages/ErrorPage/ErrorPage';
+import Faq from '../Pages/Faq/Faq';
 
 const Router = createBrowserRouter([
     {
     
         path:'/',
-        element: <Home></Home>
+        element: <Home></Home>,
+        errorElement:<ErrorPage></ErrorPage>
     },
     {
         path:'/rooms',
@@ -30,16 +33,17 @@ const Router = createBrowserRouter([
                 path:'/rooms/details/:id',
                 element:<RoomDetails></RoomDetails>
             },
-          {
-            path:'/rooms/checkout/:id',
-            element:<Checkout></Checkout>
-          }
+        
         ]
     }
     ,
     {
      path:'/mybooking',
      element:<PrivateRoutes><MyBookings></MyBookings></PrivateRoutes>
+    },
+    {
+        path:"/faq",
+        element:<Faq></Faq>
     },
     {
  path:'/about',

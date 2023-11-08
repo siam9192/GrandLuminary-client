@@ -36,7 +36,7 @@ const BannerNavbar = () => {
     : isPending
     ? "pending"
     : ""
-  } >Rooms</NavLink>
+  } >ROOMS</NavLink>
  <NavLink to='/mybooking'className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"
@@ -45,6 +45,13 @@ const BannerNavbar = () => {
     : ""
   } >MY BOOKING</NavLink>
  <NavLink to='/add-post'>POST</NavLink>
+ <NavLink to='/faq'className={({ isActive, isPending }) =>
+    isActive
+    ? "text-pink-600"
+    : isPending
+    ? "pending"
+    : ""
+  } >FAQ</NavLink>
  <NavLink to='about'className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"
@@ -59,7 +66,7 @@ const BannerNavbar = () => {
     </>
     :
     <div className="dropdown dropdown-end ">
-      <label tabIndex={0} className="btn btn-ghost border-2 border-white btn-circle avatar">
+      <label tabIndex={0} className="btn btn-ghost border-2 border-black btn-circle avatar">
         <div className="w-10 rounded-full">
           <img src={user.photoURL} />
         </div>
@@ -73,18 +80,16 @@ const BannerNavbar = () => {
           </a>
         </li>
         <li className='text-red-500'  onClick={()=>{
-                      console.log(logout)
-          logout()
-
+          UserSignOut(auth)
         }}><a>Logout</a></li>
       </ul>
-      
     </div>
+    
     }
  
  
                </ul>
-               <div className='md:hidden block text-white text-2xl mx-2' onClick={()=> setToggle(!toggle)}>
+               <div className='md:hidden block text-black text-2xl mx-2' onClick={()=> setToggle(!toggle)}>
       {
         toggle? <RxCross1></RxCross1> :<AiOutlineMenu></AiOutlineMenu>
       }

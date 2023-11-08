@@ -1,0 +1,72 @@
+ [
+      {
+        "question": "1. What is the check-in and check-out time at the hotel?",
+        "answer": "Check-in time is at 3:00 PM, and check-out time is at 11:00 AM."
+      },
+      {
+        "question": "2. Do you offer airport shuttle services?",
+        "answer": "Yes, we provide complimentary airport shuttle services. Please contact our front desk for more information."
+      },
+      {
+        "question": "3. Are pets allowed in the hotel?",
+        "answer": "We are a pet-friendly hotel. There is an additional fee for bringing pets, and certain restrictions may apply. Please check our pet policy for details."
+      },
+      {
+        "question": "4. Is Wi-Fi available in the rooms?",
+        "answer": "Yes, we offer free Wi-Fi access in all guest rooms and common areas of the hotel."
+      },
+      {
+        "question": "5. Do you have a restaurant on-site?",
+        "answer": "Yes, we have an on-site restaurant serving breakfast, lunch, and dinner. You can also enjoy room service during specific hours."
+      },
+      {
+        "question": "6. How can I cancel or modify my reservation?",
+        "answer": "To cancel or modify your reservation, please log in to your account on our website or contact our reservations department. Cancellation policies may apply."
+      },
+      
+          {
+            "question": "7. Is parking available at the hotel?",
+            "answer": "We offer both self-parking and valet parking options. Fees may apply, so please check our parking policy for details."
+          },
+          {
+            "question": "8. Are smoking rooms available?",
+            "answer": "No, our hotel is completely non-smoking. Smoking is only allowed in designated outdoor areas."
+          },
+          {
+            "question": "9. Do you have a fitness center or gym?",
+            "answer": "Yes, we have a well-equipped fitness center that is accessible to our guests 24/7."
+          },
+          {
+            "question": "10. Can I request a late check-out?",
+            "answer": "Late check-out requests are subject to availability. Please inquire at the front desk on the day of your departure."
+          },
+          {
+            "question": "11. Are rollaway beds or cribs available for children?",
+            "answer": "We offer both rollaway beds and cribs upon request. Please contact us in advance to make arrangements."
+          },
+          {
+            "question": "12. What is your cancellation policy?",
+            "answer": "Our cancellation policy varies depending on the type of reservation and rate you've booked. Please review our cancellation policy on our website for specific details."
+          },
+          {
+            "question": "13. Is there an age restriction for check-in?",
+            "answer": "Guests must be at least 18 years old to check in at our hotel, and a valid ID is required."
+          },
+          {
+            "question": "14. Do you offer group discounts or special packages?",
+            "answer": "Yes, we have special rates and packages for group bookings, events, and extended stays. Contact our group reservations department for more information."
+          },
+          {
+            "question": "15. Can I arrange airport transportation from the hotel?",
+            "answer": "We provide airport transportation services upon request. Please contact our front desk in advance to schedule a pick-up or drop-off."
+          },
+          {
+            "question": "16. Is room service available, and what are the hours?",
+            "answer": "We offer 24/7 room service with a diverse menu. You can order your preferred meal or snack at any time during your stay."
+          }
+        
+      
+      
+    ]
+  
+  

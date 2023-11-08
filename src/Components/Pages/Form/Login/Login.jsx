@@ -3,6 +3,9 @@ import { useState,useContext } from 'react';
 import { useLocation,useNavigate,Link } from 'react-router-dom';
 import { fireBaseContext } from '../../../../AuthProvider/AuthProvider';
 import AxiosBase from '../../../Axios/AxiosBase';
+import {AiFillGoogleCircle} from 'react-icons/ai'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import auth from '../../../../Firebase/firebase.config';
 const Login = () => {
     const {login} = useContext(fireBaseContext);
     const [toggle,setToggle] = useState(false);
@@ -27,7 +30,7 @@ if(state){
     navigate(state);
 }
 else{
-    // navigate('/')
+    navigate('/')
 
 }
 })
@@ -41,11 +44,12 @@ form.reset()
         const provider = new GoogleAuthProvider();
          signInWithPopup(auth,provider)
          .then(res=>{
+            AxiosBase().post('/api/v1/jwt')
             if(state){
                 navigate(state);
             }
             else{
-                navigate('/')
+                navigate('/');
             }
          })
     }
@@ -53,7 +57,7 @@ form.reset()
         <div>
         <div className='grid md:grid-cols-2 min-h-[100vh] font-pop'>
          <div className='md:py-10 py-2 mx-2 flex flex-col justify-center '>
-          <h1 className='text-4xl text-center text-black'>Create your account</h1>
+          <h1 className='text-4xl text-center text-black'>Login Now</h1>
           <form className='space-y-6' onSubmit={handleLogin} >
             <div className='space-y-2'>
                 <h3>Your email</h3>
@@ -68,7 +72,11 @@ form.reset()
          }
             <button type='submit' className='w-full py-2 text-white bg-blue-600'>Login</button>
             <h1 className='text-black'>Don't have an account?<Link to='/signup' className = "text-blue-600 font-semibold"> Sign up</Link></h1>
+         
           </form>
+          <div className='md:flex justify-center items-center py-6' onClick={googleLogin}>
+           <button className='md:w-1/2 bg-base-100 py-3 border-2  text-4xl rounded-full  px-4 flex justify-between hover:bg-gray-200 items-center '><AiFillGoogleCircle></AiFillGoogleCircle><h2 className='text-xl text-black'>Login with google</h2></button>
+           </div>
          </div>
          
          <div className='banner_sign h-full flex justify-center items-center lg:block hidden'>

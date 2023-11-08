@@ -8,24 +8,33 @@ const AddReview = ({reviews,setReviews}) => {
     const {user} = GetLoginInfo();
     const [userRating,setUserRating] = useState(1);
     const [bookings,setBooking] = useState([]);
+    const[hidden,setHidden] = useState(true);
     const [room,setRoom] = useState({});
-    const date = new Date()
+    const date = new Date();
     const review_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
 
     useEffect(()=>{
      if(user ){
+           
+        AxiosBase().get(`/api/v1/bookings?user_email=${user.email}&room_id=${params.id}`)
+        .then(res =>{
+          if(res.data.length === 0){
+            setHidden(false)
+            return;
+          }
           AxiosBase().get(`/api/user/review?user_email=${user.email}&room_id=${params.id}`)
           .then(res=>{
-            console.log(res.data)
-            if(res.data.length ===  0){
-                
-                AxiosBase().get(`/api/v1/bookings?user_email=${user.email}&room_id=${params.id}`)
-     .then(res =>{
-        setBooking(res.data)
-       
-     })
+            if(res.data.length > 0){
+                setHidden(false);
+                return;
             }
+
+             
+            
           })
+          
+        })
+         
         
      
      }
@@ -64,14 +73,15 @@ const AddReview = ({reviews,setReviews}) => {
         AxiosBase().patch(`/api/v1/update-room?id=${params.id}`,updateRoomData);
         document.getElementById('my_review_1').close();
         setReviews ([...reviews,review])
+ setHidden(false)
     }
    })
   
     }
     return (
         <>
-        <div className={`py-7 ${bookings.length > 0 ? "block" : "hidden"}`}>
-        <h1 className="text-2xl text-black pb-5">Post your review:</h1>
+        <div className={`p-5 mt-8 bg-gray-200 rounded-lg ${hidden && user ? "block":"hidden"}`}>
+        <h1 className="text-3xl text-black pb-5 text-center">Post your review:</h1>
     
         <div>
             <div className='flex items-center gap-3'><p className="text-2xl">Ratting:</p><Rating value={userRating} size = "large" onChange={(event,value)=>{
@@ -82,8 +92,8 @@ const AddReview = ({reviews,setReviews}) => {
             }}/></div>
             
                 <form onSubmit={submitReview}>
-              <div className='w-1/2'>
-              <textarea name="review"  className='w-full border-2 min-h-[200px] mt-4 resize-none p-2' placeholder='Write about your experience ' required></textarea>
+              <div className=''>
+              <textarea name="review"  className='w-full border-2 min-h-[200px] mt-4 resize-none p-2 border-black outline-none ' placeholder='Write about your experience ' required></textarea>
                 <div className="text-end py-2">
                 <button type='submit' className='text-white px-8 py-2 bg-orange-500'>Submit review</button>
                 </div>
