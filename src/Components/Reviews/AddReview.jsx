@@ -3,7 +3,7 @@ import { Rating } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import GetLoginInfo from '../Resuse/GetLogInfo/GetLoginInfo';
 import AxiosBase from '../Axios/AxiosBase';
-const AddReview = ({reviews,setReviews}) => {
+const AddReview = ({reviews,setReviews,onChange}) => {
     const params = useParams();
     const {user} = GetLoginInfo();
     const [userRating,setUserRating] = useState(1);
@@ -29,13 +29,10 @@ const AddReview = ({reviews,setReviews}) => {
                 return;
             }
 
-             
             
           })
           
         })
-         
-        
      
      }
      },[user,reviews])

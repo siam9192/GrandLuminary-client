@@ -35,12 +35,16 @@ const Booking = ({booking,refetch}) => {
         const date = new Date();
         const currentDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
         
-        const date1 = moment(currentDate);
-const date2 = moment(booking.check_in_date);
-const dif = date2.diff(date1,'days');
+//         const date1 = moment(currentDate);
+// const date2 = moment(booking.check_in_date);
+// const dif = date1.diff(date1,'days');
 const available_seats = room.available_seats+1;
-console.log(dif + 1)
-if(dif <=0){
+const date1 = new Date(currentDate);
+const date2 = new Date (booking.check_in_date);
+const time = date2.getTime()-date1.getTime();
+const dif = time/(1000*60*60*24)
+
+if(dif <=0 ){
   Swal.fire({
     title: "You can not cancel it right now",
     text: "Cancel date expired.",
@@ -55,6 +59,7 @@ if(dif > 0){
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
+        cancelButtonText:"No",
         confirmButtonText: "i'm sure!"
       }).then((result) => {
         if (result.isConfirmed) {
@@ -85,11 +90,13 @@ if(dif > 0){
     }
     const handleUpdate = ()=>{
     if(check_in_value === booking.check_in_date){
+        document.getElementById('my_update').close()
        Swal.fire({
                     title: "The room is booked on this date!",
                     text: "Try on another date.",
                     icon: "error"
                   });
+
        return;
     }
     setUpdating(true)
@@ -102,7 +109,7 @@ if(dif > 0){
       return;
       
      }
-    console.log(check_in_value)
+   
      AxiosBase().patch(`/api/v1/booking/update?id=${booking._id}`,{check_in_date: check_in_value})
      .then((res)=>{
      if(res.data){

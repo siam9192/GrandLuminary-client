@@ -2,9 +2,13 @@ import React from 'react';
 import './About.css'
 import Navbar from '../../Navbar/Navbar';
 import Footer from '../../Footer/Footer';
+import { Helmet } from 'react-helmet';
 const About = () => {
     return (
         <>
+        <Helmet>
+            <title>Grand Luminary || ABOUT</title>
+        </Helmet>
         <div className='max-w-7xl mx-auto font-lato pb-10'>
             {/* <img src="/images/hotel/banner/banner1.jpg" alt="" /> */}
 

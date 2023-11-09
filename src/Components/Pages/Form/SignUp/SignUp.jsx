@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import auth from '../../../../Firebase/firebase.config';
 import './signUp.css'
 import { updateCurrentUser, updateProfile } from 'firebase/auth';
+import { Helmet } from 'react-helmet';
 const SignUp = () => {
             const [toggle,setToggle] = useState(false);
             const [err,setErr] = useState('');
@@ -81,6 +82,9 @@ const SignUp = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Grand Luminary || SIGN UP</title>
+            </Helmet>
             <div className='grid md:grid-cols-2 min-h-[100vh] font-pop'>
              <div className='md:py-10 py-2 mx-2'>
               <h1 className='text-4xl text-center text-black'>Create your account</h1>

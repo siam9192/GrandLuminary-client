@@ -4,6 +4,8 @@ import Booking from './Booking';
 import AxiosBase from '../../Axios/AxiosBase';
 import { fireBaseContext } from '../../../AuthProvider/AuthProvider';
 import {useQuery} from '@tanstack/react-query';
+import Footer from '../../Footer/Footer';
+import { Helmet } from 'react-helmet';
 const MyBookings = () => {
     const {user,loading} = useContext(fireBaseContext);
     useEffect(()=>{
@@ -25,10 +27,14 @@ const MyBookings = () => {
  }
     
     return (
+        <>
+        <Helmet>
+            <title>Grand Luminary || MY BOOKING</title>
+        </Helmet>
         <div className='max-w-7xl mx-auto font-pop'>
             <Navbar></Navbar>      
           
-           <div className='py-4 '>
+           <div className='py-4  min-h-[80vh]'>
                 <h1 className='text-2xl text-black py-3'>You have {bookings.length} bookings</h1>
                <div className='grid md:grid-cols-2 gap-5'>
                 {
@@ -39,6 +45,8 @@ const MyBookings = () => {
                </div>
            </div>
         </div>
+      <Footer></Footer>
+        </>
     );
 }
 

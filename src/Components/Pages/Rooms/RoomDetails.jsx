@@ -17,6 +17,7 @@ import {
     useQuery,
   } from '@tanstack/react-query'
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 const RoomDetails = () => {
     // const [room,setRoom] = useState(null);
     const {user} = GetLoginInfo();
@@ -30,7 +31,7 @@ const RoomDetails = () => {
     const navigate = useNavigate();
     const current_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
     const [check_in,set_check_in ] = useState(null);
-    console.log(useParams())
+    
 const {data:room,isLoading,refetch} = useQuery({
     queryKey:['room-details'],
     queryFn:async()=>{
@@ -77,8 +78,7 @@ const handleBooking = ()=>{
        
         AxiosBase().get(`/api/v1/find/booking?check_in_date=${check_in_date}&room_id=${room_id}`)
         .then(res => {
-            console.log(check_in_date)
-            console.log(res.data)
+            
             if(res.data.length > 0){
                 Swal.fire({
                     title: "The room is booked on this date!",
@@ -106,6 +106,7 @@ const confrimeBooking = ()=>{
             refetch()
             document.getElementById('my_modal_1').close()
             toast.success('Booking successful!')
+            window.location.reload();
            }
         })
     })
@@ -118,6 +119,9 @@ const confrimeBooking = ()=>{
 
     return (
        <div className=''>
+        <Helmet>
+            <title>Grand Luminary || ROOM DETAILS</title>
+        </Helmet>
          <div className='min-h-[90vh] pb-8 font-pop max-w-7xl mx-auto lg:px-0 px-2'>
            
            <div className=' gap-3 '>

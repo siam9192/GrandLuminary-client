@@ -4,6 +4,7 @@ import {AiFillStar,AiOutlineStar} from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom';
 import QueryRooms from '../../Axios/Query/QueryRooms';
 import AddReview from '../../Reviews/AddReview';
+import { Helmet } from 'react-helmet';
 const Rooms = () => {
    const [minimumPrice,setMinimumPrice] = useState(0);
    const [maxPrice,setMaxPrice] = useState(2000)
@@ -24,6 +25,9 @@ const Rooms = () => {
     return (
         
         <div className='min-h-[90vh]  font-pop mb-2 max-w-7xl mx-auto lg:px-0 px-2'>
+            <Helmet>
+                <title>Grand Luminary || ROOMS</title>
+            </Helmet>
             <div className=''>
             <div className='grid lg:grid-cols-4 grid-cols-2 gap-5  pb-2 border-b-2 pt-1  '>
                

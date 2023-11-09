@@ -1,8 +1,9 @@
-# React + Vite
+- About my project
+- 1. my projects is a hotel booking related.user can book hotel in this website
+- 2. User can book only available rooms
+- 3. user can not be able to book room with out login in the website
+- 4. user can be update and cancel his booking date
+- 5. user can see all of his booking in the my booking page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- My projects client site link:

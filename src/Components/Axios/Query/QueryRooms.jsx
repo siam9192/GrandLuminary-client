@@ -6,8 +6,11 @@ const QueryRooms = (min_price,max_price,sort_type) => {
     const {data:rooms,isLoading,refetch} = useQuery({
         queryKey:["rooms"],
         queryFn:async()=>{
-            const data = await  fetch (`http://localhost:5000/api/v1/rooms?min_price=${min_price}&max_price=${max_price}&sort_type=${sort_type}`);
-            return await data.json();
+            const res = await  fetch (`http://localhost:5000/api/v1/rooms?min_price=${min_price}&max_price=${max_price}&sort_type=${sort_type}`);
+            // return await data.json();
+            const data = await res.json();
+            const result = data.filter(d=> d.available_seats !== 0);
+            return result;
 
         }
     })

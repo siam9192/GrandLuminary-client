@@ -14,7 +14,7 @@ const BannerNavbar = () => {
  
     return (
         <div className='bg-white'>
-          <div className='flex items-center justify-between max-w-7xl mx-auto bg-white mx-auto font-rob overflow-hidden w-full'>
+          <div className='flex items-center justify-between max-w-7xl mx-auto bg-white  w-full'>
             <div className='flex items-center gap-2'>
                 <div>
                 <img src="images/Logo/Logo.png" alt="" className='w-20' />
@@ -29,7 +29,7 @@ const BannerNavbar = () => {
     : isPending
     ? "pending"
     : ""
-  } >Home</NavLink>
+  } >HOME</NavLink>
  <NavLink to='/rooms'className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"
@@ -52,7 +52,7 @@ const BannerNavbar = () => {
     ? "pending"
     : ""
   } >FAQ</NavLink>
- <NavLink to='about'className={({ isActive, isPending }) =>
+ <NavLink to='/about'className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"
     : isPending
@@ -61,8 +61,8 @@ const BannerNavbar = () => {
   } >ABOUT US</NavLink>
  {
     !user ? <>
-    <NavLink to='/signup'>SIGN UP</NavLink>
-    <NavLink to='/login'>LOGIN</NavLink>
+    <NavLink to='/signup' className='px-7 py-2 bg-black text-white'>SIGN UP</NavLink>
+    <NavLink to='/login' className='px-7 py-2 bg-black text-white'>LOGIN</NavLink>
     </>
     :
     <div className="dropdown dropdown-end ">
@@ -80,7 +80,7 @@ const BannerNavbar = () => {
           </a>
         </li>
         <li className='text-red-500'  onClick={()=>{
-          UserSignOut(auth)
+       logout()
         }}><a>Logout</a></li>
       </ul>
     </div>

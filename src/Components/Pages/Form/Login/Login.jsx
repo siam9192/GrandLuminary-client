@@ -6,6 +6,7 @@ import AxiosBase from '../../../Axios/AxiosBase';
 import {AiFillGoogleCircle} from 'react-icons/ai'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import auth from '../../../../Firebase/firebase.config';
+import { Helmet } from 'react-helmet';
 const Login = () => {
     const {login} = useContext(fireBaseContext);
     const [toggle,setToggle] = useState(false);
@@ -55,6 +56,9 @@ form.reset()
     }
     return (
         <div>
+            <Helmet>
+                <title>Grand Luminary || LOGIN</title>
+            </Helmet>
         <div className='grid md:grid-cols-2 min-h-[100vh] font-pop'>
          <div className='md:py-10 py-2 mx-2 flex flex-col justify-center '>
           <h1 className='text-4xl text-center text-black'>Login Now</h1>

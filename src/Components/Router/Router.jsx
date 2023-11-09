@@ -6,7 +6,6 @@ import Login from '../Pages/Form/Login/Login';
 import Routes from '../Routes/Routes';
 import Rooms from '../Pages/Rooms/Rooms';
 import RoomDetails from '../Pages/Rooms/RoomDetails';
-import Checkout from '../Pages/Form/Checkout/Checkout';
 import MyBookings from '../Pages/MyBookings/MyBookings';
 import About from '../Pages/About/About';
 import AddPost from '../Pages/Post/Post';

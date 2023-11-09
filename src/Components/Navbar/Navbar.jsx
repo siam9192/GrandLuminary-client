@@ -14,10 +14,10 @@ const Navbar = () => {
     const [toggle,setToggle] = useState(false)
    
     return (
-      <div className='flex items-center justify-between max-w-7xl mx-auto font-rob overflow-hidden w-full'>
+      <div className='flex items-center justify-between max-w-7xl mx-auto font-rob  w-full py-8'>
             <div className='flex items-center gap-2'>
                 <div>
-                <img src="images/Logo/Logo.png" alt="" className='w-20' />
+                <img src="/images/Logo/Logo.png" alt="" className='w-20' />
                 </div>
                 <h1 className='text-black font-bold text-3xl'>Grand Luminary</h1>
             </div>
@@ -45,7 +45,7 @@ const Navbar = () => {
     : ""
   } >MY BOOKING</NavLink>
  <NavLink to='/add-post'>POST</NavLink>
- <NavLink to='about'className={({ isActive, isPending }) =>
+ <NavLink to='/about'className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"
     : isPending
@@ -54,17 +54,17 @@ const Navbar = () => {
   } >ABOUT US</NavLink>
  {
     !user ? <>
-    <NavLink to='/signup'>SIGN UP</NavLink>
-    <NavLink to='/login'>LOGIN</NavLink>
+    <NavLink to='/signup'className='px-7 py-2 bg-black text-white'>SIGN UP</NavLink>
+    <NavLink to='/login'className='px-7 py-2 bg-black text-white'>LOGIN</NavLink>
     </>
     :
     <div className="dropdown dropdown-end ">
-      <label tabIndex={0} className="btn btn-ghost border-2 border-white btn-circle avatar">
+      <label tabIndex={0} className="btn btn-ghost border-2 border-white btn-circle avatar ">
         <div className="w-10 rounded-full">
           <img src={user.photoURL} />
         </div>
       </label>
-      <ul tabIndex={0} className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box md:w-72 border-2  text-black`}>
+      <ul tabIndex={0} className={`menu menu-sm dropdown-content bg-black mt-3 z-[1] p-2 shadow rounded-box md:w-72 border-2  text-white`}>
         <li className=''>
         
           <a className="justify-between text-xl">
@@ -73,7 +73,7 @@ const Navbar = () => {
           </a>
         </li>
         <li className='text-red-500'  onClick={()=>{
-                      console.log(logout)
+                 
           logout()
 
         }}><a>Logout</a></li>

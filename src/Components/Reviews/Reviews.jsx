@@ -7,7 +7,7 @@ import Review from "./Review";
 import AxiosBase from "../Axios/AxiosBase";
 import { useParams } from "react-router-dom";
 
-const Reviews = () => {
+const Reviews = ({change}) => {
     const [reviews,setReviews] = useState([]);
     const params = useParams();
     useEffect(()=>{
@@ -32,7 +32,7 @@ return <Review review={review}></Review>
     <h1 className="text-center text-black text-3xl">No reviews</h1>
 </div>
       }
-      <AddReview reviews = {reviews} setReviews = {handleReviews}></AddReview>
+      <AddReview reviews = {reviews} setReviews = {handleReviews} change={change}></AddReview>
       
         </>
     );
