@@ -16,7 +16,7 @@ const Booking = ({booking,refetch}) => {
     const {data:room,isLoading,refetch:roomFetch} = useQuery({
         queryKey:['book-data'],
         queryFn:async()=>{
-            const res = await fetch(`http://localhost:5000/api/v1/room/get?id=${booking.room_id}`);
+            const res = await fetch(`https://ass11-gl0jvmq72-siam-hasans-projects.vercel.app/api/v1/room/get?id=${booking.room_id}`);
             return await res.json();
         }
         })
