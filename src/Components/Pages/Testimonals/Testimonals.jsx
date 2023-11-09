@@ -18,7 +18,11 @@ const Testimonals = () => {
   const [reviews, setUserReviews] = useState([])
   useEffect(() => {
     AxiosBase().get('/api/v1/reviews')
-      .then(res => setUserReviews(res.data))
+      .then(res =>{
+        // console.log(res.data)
+          setUserReviews(res.data)
+      })
+    
   }, [])
   // console.log(reviews)
   return (

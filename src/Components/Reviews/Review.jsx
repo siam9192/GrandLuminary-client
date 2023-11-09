@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Rating from "react-rating";
 import {AiFillStar,AiOutlineStar} from 'react-icons/ai';
 import moment from 'moment/moment';
+import Aos from 'aos';
 const Review = ({review}) => {
+useEffect(()=>{
+  Aos.init()
+})
     // const timeLaps = moment("20111031", "YYYYMMDD").fromNow(); // 12 years ago
     const date = new Date();
     const currentDate =`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
