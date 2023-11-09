@@ -35,7 +35,7 @@ const RoomDetails = () => {
 const {data:room,isLoading,refetch} = useQuery({
     queryKey:['room-details'],
     queryFn:async()=>{
-        const res = await fetch(`http://localhost:5000/api/v1/room/get?id=${id}`);
+        const res = await fetch(`https://ass11-myetw730e-siam-hasans-projects.vercel.app/api/v1/room/get?id=${id}`);
         const data = res.json();
         return data;
     }

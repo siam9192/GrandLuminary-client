@@ -22,7 +22,7 @@ const BannerNavbar = () => {
                 <h1 className='text-black font-bold text-3xl'>Grand Luminary</h1>
             </div>
             <nav>
-               <ul className='md:flex items-center gap-2 text-black text-xl md:block hidden  '>
+               <ul className='lg:flex items-center gap-2 text-black text-xl lg:block hidden  '>
  <NavLink to='/'className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"
@@ -44,7 +44,7 @@ const BannerNavbar = () => {
     ? "pending"
     : ""
   } >MY BOOKING</NavLink>
- <NavLink to='/add-post'>POST</NavLink>
+
  <NavLink to='/faq'className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"
@@ -89,14 +89,14 @@ const BannerNavbar = () => {
  
  
                </ul>
-               <div className='md:hidden block text-black text-2xl mx-2' onClick={()=> setToggle(!toggle)}>
+               <div className='lg:hidden block text-black text-2xl mx-2' onClick={()=> setToggle(!toggle)}>
       {
         toggle? <RxCross1></RxCross1> :<AiOutlineMenu></AiOutlineMenu>
       }
       </div>
             </nav>
             </div>
-          <ul className={`md:hidden flex flex-col ${toggle ? "left-0" : "-left-[100%]"} duration-200 md:duration-0 text-black font-semibold space-y-7 shadow-xl z-[10] bg-white bg-white top-0 px-20 py-5 h-full fixed`}>
+          <ul className={`lg:hidden flex flex-col ${toggle ? "left-0" : "-left-[100%]"} duration-200 lg:duration-0 text-black font-semibold space-y-7 shadow-xl z-[10] bg-white bg-white top-0 px-20 py-5 h-full fixed`}>
           <NavLink className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"

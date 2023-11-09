@@ -8,7 +8,6 @@ import Rooms from '../Pages/Rooms/Rooms';
 import RoomDetails from '../Pages/Rooms/RoomDetails';
 import MyBookings from '../Pages/MyBookings/MyBookings';
 import About from '../Pages/About/About';
-import AddPost from '../Pages/Post/Post';
 import PrivateRoutes from '../PrivateRoutes/PrivateRoutes';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Faq from '../Pages/Faq/Faq';
@@ -57,10 +56,7 @@ const Router = createBrowserRouter([
         path:'/login',
         element:<Login></Login>
     },
-    {
-        path:'/add-post',
-        element:<AddPost></AddPost>
-    }
+    
 ])
 
 

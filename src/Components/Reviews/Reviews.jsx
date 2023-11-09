@@ -7,14 +7,15 @@ import Review from "./Review";
 import AxiosBase from "../Axios/AxiosBase";
 import { useParams } from "react-router-dom";
 
-const Reviews = ({change}) => {
+const Reviews = () => {
     const [reviews,setReviews] = useState([]);
     const params = useParams();
+    console.log(params)
     useEffect(()=>{
-        AxiosBase().get(`/api/v1/reviews?room_id=${params.id}`)
+        AxiosBase().get(`https://ass11-gl0jvmq72-siam-hasans-projects.vercel.app/api/v1/reviews?room_id=${params.id}`)
         .then(res => setReviews(res.data))
     },[])
-
+console.log(reviews)
 const handleReviews = (review)=>{
 setReviews(review)
 }
@@ -32,7 +33,7 @@ return <Review review={review}></Review>
     <h1 className="text-center text-black text-3xl">No reviews</h1>
 </div>
       }
-      <AddReview reviews = {reviews} setReviews = {handleReviews} change={change}></AddReview>
+      <AddReview reviews = {reviews} setReviews = {handleReviews} ></AddReview>
       
         </>
     );

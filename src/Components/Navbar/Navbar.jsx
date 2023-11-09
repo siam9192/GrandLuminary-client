@@ -14,7 +14,7 @@ const Navbar = () => {
     const [toggle,setToggle] = useState(false)
    
     return (
-      <div className='flex items-center justify-between max-w-7xl mx-auto font-rob  w-full py-8'>
+      <div className='flex items-center justify-between max-w-7xl mx-auto   w-full py-6'>
             <div className='flex items-center gap-2'>
                 <div>
                 <img src="/images/Logo/Logo.png" alt="" className='w-20' />
@@ -22,14 +22,14 @@ const Navbar = () => {
                 <h1 className='text-black font-bold text-3xl'>Grand Luminary</h1>
             </div>
             <nav>
-               <ul className='md:flex items-center gap-2 text-black text-xl md:block hidden  '>
+               <ul className='lg:flex items-center gap-2 text-black text-xl lg:block hidden  '>
  <NavLink to='/'className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"
     : isPending
     ? "pending"
     : ""
-  } >Home</NavLink>
+  } >HOME</NavLink>
  <NavLink to='/rooms'className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"
@@ -84,13 +84,13 @@ const Navbar = () => {
  
  
                </ul>
-               <div className='md:hidden block text-black text-2xl mx-2' onClick={()=> setToggle(!toggle)}>
+               <div className='lg:hidden block text-black text-2xl mx-2' onClick={()=> setToggle(!toggle)}>
       {
         toggle? <RxCross1></RxCross1> :<AiOutlineMenu></AiOutlineMenu>
       }
       </div>
             </nav>
-          <ul className={`md:hidden flex flex-col ${toggle ? "left-0" : "-left-[100%]"} duration-200 md:duration-0 text-black font-semibold space-y-7 shadow-xl z-[10] bg-white bg-white top-0 px-20 py-5 h-full fixed`}>
+          <ul className={`lg:hidden flex flex-col ${toggle ? "left-0" : "-left-[100%]"} duration-200 md:duration-0 text-black font-semibold space-y-7 shadow-xl z-[10] bg-white bg-white top-0 px-20 py-5 h-full fixed`}>
           <NavLink className={({ isActive, isPending }) =>
     isActive
     ? "text-pink-600"

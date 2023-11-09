@@ -15,7 +15,7 @@ const MyBookings = () => {
     const {data:bookings,isLoading,refetch} = useQuery({
         queryKey:['booking-data'],
         queryFn:async()=>{
-            const res = await fetch(`http://localhost:5000/api/v1/bookings?user_email=${user.email}`,{
+            const res = await fetch(`https://ass11-myetw730e-siam-hasans-projects.vercel.app/api/v1/bookings?user_email=${user.email}`,{
                 method:'GET',
                 credentials : 'include'
             });
