@@ -60,7 +60,7 @@ const Featured = () => {
                {
                 featured.map((item,index)=>{
                     return <div className=' ' key={index} data-aos="zoom-in-up">
-                             <img src={item.images[0]} alt="" className='w-full h-72' />
+                             <img src={item.images[0]} alt="" className='w-full md:h-72' />
                              <div className='px-2'>
                                 <h1 className='text-black text-2xl py-2'>${item.price}/night</h1>
                                 <div>

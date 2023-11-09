@@ -11,6 +11,7 @@ import About from '../Pages/About/About';
 import PrivateRoutes from '../PrivateRoutes/PrivateRoutes';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Faq from '../Pages/Faq/Faq';
+import PrivateRoutes2 from '../PrivateRoutes/PrivaRoutes2';
 
 const Router = createBrowserRouter([
     {
@@ -49,12 +50,12 @@ const Router = createBrowserRouter([
     },
     {
         path:'/signup',
-        element:<SignUp></SignUp>
+        element:<PrivateRoutes2><SignUp></SignUp></PrivateRoutes2>
     },
     
     {
         path:'/login',
-        element:<Login></Login>
+        element:<PrivateRoutes2><Login></Login></PrivateRoutes2>
     },
     
 ])
