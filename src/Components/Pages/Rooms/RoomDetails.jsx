@@ -35,7 +35,7 @@ const RoomDetails = () => {
 const {data:room,isLoading,refetch} = useQuery({
     queryKey:['room-details'],
     queryFn:async()=>{
-        const res = await fetch(`https://ass11-myetw730e-siam-hasans-projects.vercel.app/api/v1/room/get?id=${id}`);
+        const res = await fetch(`https://ass11-gl0jvmq72-siam-hasans-projects.vercel.app/api/v1/room/get?id=${id}`);
         const data = res.json();
         return data;
     }
@@ -131,7 +131,7 @@ const confrimeBooking = ()=>{
             <div className='flex items-center flex-wrap gap-3 py-3'>
          {
             room.images.map((item,index)=>{
-    return <div onClick={()=>{
+    return <div key={index} onClick={()=>{
         setImage(index)
     }}>
     
@@ -248,6 +248,7 @@ const confrimeBooking = ()=>{
       <form method="dialog">
     
       </form>
+      
     </div>
   </div>
 }

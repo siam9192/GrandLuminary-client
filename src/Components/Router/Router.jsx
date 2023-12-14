@@ -12,6 +12,7 @@ import PrivateRoutes from '../PrivateRoutes/PrivateRoutes';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Faq from '../Pages/Faq/Faq';
 import PrivateRoutes2 from '../PrivateRoutes/PrivaRoutes2';
+import Weather from '../Pages/Weather/Weather';
 
 const Router = createBrowserRouter([
     {
@@ -56,6 +57,10 @@ const Router = createBrowserRouter([
     {
         path:'/login',
         element:<PrivateRoutes2><Login></Login></PrivateRoutes2>
+    },
+    {
+        path:'/weather',
+        element:<Weather></Weather>
     },
     
 ])

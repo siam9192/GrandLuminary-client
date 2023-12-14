@@ -44,6 +44,13 @@ const BannerNavbar = () => {
     ? "pending"
     : ""
   } >MY BOOKING</NavLink>
+  <NavLink to='/weather'className={({ isActive, isPending }) =>
+    isActive
+    ? "text-pink-600"
+    : isPending
+    ? "pending"
+    : ""
+  } >WEATHER</NavLink>
 
  <NavLink to='/faq'className={({ isActive, isPending }) =>
     isActive

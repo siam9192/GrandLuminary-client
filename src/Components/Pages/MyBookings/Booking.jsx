@@ -23,7 +23,7 @@ const Booking = ({booking,refetch}) => {
         const handleDateChange = (date) => {
         
           const newDate = new Date(date)
-                const c_d = `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`;
+
               // setSelectedDate(date);
               set_check_in_value(c_d)  
               console.log(c_d)

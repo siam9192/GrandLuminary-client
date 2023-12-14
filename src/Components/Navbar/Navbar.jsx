@@ -44,6 +44,13 @@ const Navbar = () => {
     ? "pending"
     : ""
   } >MY BOOKING</NavLink>
+   <NavLink to='/weather'className={({ isActive, isPending }) =>
+    isActive
+    ? "text-pink-600"
+    : isPending
+    ? "pending"
+    : ""
+  } >Weather</NavLink>
  <NavLink to='/add-post'>POST</NavLink>
  <NavLink to='/about'className={({ isActive, isPending }) =>
     isActive
@@ -112,6 +119,14 @@ const Navbar = () => {
     ? "pending"
     : ""
   } to='/mybooking'><div className='flex items-center gap-1'><AiOutlineBook></AiOutlineBook><h3>MY BOOKING</h3></div></NavLink>
+   <NavLink to='/weather'className={({ isActive, isPending }) =>
+    isActive
+    ? "text-pink-600"
+    : isPending
+    ? "pending"
+    : ""
+  } >WEATHER</NavLink>
+  
          {
           !user && <>
            <NavLink to='/signup'><div className='flex items-center gap-1'><IoMdCreate></IoMdCreate><h3>SIGN UP</h3></div></NavLink>
